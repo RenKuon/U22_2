@@ -34,5 +34,17 @@ namespace プロコン部チーム_0622_TEST.Properties {
                 this["folderpath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string raw_movie_filepath {
+            get {
+                return ((string)(this["raw_movie_filepath"]));
+            }
+            set {
+                this["raw_movie_filepath"] = value;
+            }
+        }
     }
 }

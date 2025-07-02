@@ -123,6 +123,7 @@ namespace プロコン部チーム_0622_TEST
             string outputFile = $"recording_{timestamp}.mp4";// 出力ファイル名（必要に応じてパスも指定可）
 
             string outputFilePath = Path.Combine(Properties.Settings.Default.folderpath, outputFile);//出力先パス、ファイル名をグローバルな変数から持ってくる
+            Properties.Settings.Default.raw_movie_filepath = outputFilePath; //設定ファイルに出力先パスを保存
             recorder.StartRecording(outputFilePath);
 
         }

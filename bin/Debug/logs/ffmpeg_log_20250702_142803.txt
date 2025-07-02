@@ -1,0 +1,143 @@
+
+FFmpeg StdErr:ffmpeg version 7.1.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+FFmpeg StdErr:  built with gcc 14.2.0 (Rev1, Built by MSYS2 project)
+FFmpeg StdErr:  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint
+FFmpeg StdErr:  libavutil      59. 39.100 / 59. 39.100
+FFmpeg StdErr:  libavcodec     61. 19.101 / 61. 19.101
+FFmpeg StdErr:  libavformat    61.  7.100 / 61.  7.100
+FFmpeg StdErr:  libavdevice    61.  3.100 / 61.  3.100
+FFmpeg StdErr:  libavfilter    10.  4.100 / 10.  4.100
+FFmpeg StdErr:  libswscale      8.  3.100 /  8.  3.100
+FFmpeg StdErr:  libswresample   5.  3.100 /  5.  3.100
+FFmpeg StdErr:  libpostproc    58.  3.100 / 58.  3.100
+FFmpeg StdErr:[gdigrab @ 0000027cefb3ab40] Capturing whole desktop as 1920x1200x32 at (0,0)
+FFmpeg StdErr:[gdigrab @ 0000027cefb3ab40] Stream #0: not enough frames to estimate rate; consider increasing probesize
+FFmpeg StdErr:Input #0, gdigrab, from 'desktop':
+FFmpeg StdErr:  Duration: N/A, start: 1751434031.069241, bitrate: 4423705 kb/s
+FFmpeg StdErr:  Stream #0:0: Video: bmp, bgra, 1920x1200, 4423705 kb/s, 60 fps, 1000k tbr, 1000k tbn
+FFmpeg StdErr:Stream mapping:
+FFmpeg StdErr:  Stream #0:0 -> #0:0 (bmp (native) -> h264 (libx264))
+FFmpeg StdErr:Press [q] to stop, [?] for help
+FFmpeg StdErr:[libx264 @ 0000027cefb3c000] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+FFmpeg StdErr:[libx264 @ 0000027cefb3c000] profile Constrained Baseline, level 5.0, 4:2:0, 8-bit
+FFmpeg StdErr:[libx264 @ 0000027cefb3c000] 264 - core 164 r3204 373697b - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=0 ref=1 deblock=0:0:0 analyse=0:0 me=dia subme=0 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=24 lookahead_threads=4 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=0 weightp=0 keyint=250 keyint_min=25 scenecut=0 intra_refresh=0 rc=crf mbtree=0 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=0
+FFmpeg StdErr:Output #0, mp4, to 'C:\Users\hayat\Downloads\recording_20250702_142710.mp4':
+FFmpeg StdErr:  Metadata:
+FFmpeg StdErr:    encoder         : Lavf61.7.100
+FFmpeg StdErr:  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 1920x1200, q=2-31, 60 fps, 15360 tbn
+FFmpeg StdErr:      Metadata:
+FFmpeg StdErr:        encoder         : Lavc61.19.101 libx264
+FFmpeg StdErr:      Side data:
+FFmpeg StdErr:        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+FFmpeg StdErr:frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    
+FFmpeg StdErr:frame=    4 fps=3.9 q=17.0 size=       0KiB time=00:00:00.08 bitrate=   4.6kbits/s speed=0.0808x    
+FFmpeg StdErr:frame=   16 fps= 10 q=13.0 size=     256KiB time=00:00:00.51 bitrate=4059.7kbits/s speed=0.334x    
+FFmpeg StdErr:frame=   28 fps= 14 q=13.0 size=     256KiB time=00:00:00.96 bitrate=2169.9kbits/s speed=0.467x    
+FFmpeg StdErr:frame=   38 fps= 15 q=12.0 size=     512KiB time=00:00:01.41 bitrate=2961.0kbits/s speed=0.548x    
+FFmpeg StdErr:frame=   51 fps= 16 q=15.0 size=     512KiB time=00:00:01.96 bitrate=2132.9kbits/s speed=0.634x    
+FFmpeg StdErr:frame=   62 fps= 17 q=13.0 size=     512KiB time=00:00:02.51 bitrate=1666.8kbits/s speed=0.696x    
+FFmpeg StdErr:frame=   73 fps= 18 q=13.0 size=    1024KiB time=00:00:02.98 bitrate=2812.0kbits/s speed=0.723x    
+FFmpeg StdErr:frame=   86 fps= 18 q=13.0 size=    1024KiB time=00:00:03.51 bitrate=2385.5kbits/s speed=0.756x    
+FFmpeg StdErr:frame=   97 fps= 19 q=13.0 size=    1280KiB time=00:00:04.03 bitrate=2599.9kbits/s speed=0.781x    
+FFmpeg StdErr:frame=  110 fps= 19 q=18.0 size=    1280KiB time=00:00:04.56 bitrate=2296.2kbits/s speed=0.804x    
+FFmpeg StdErr:frame=  124 fps= 20 q=13.0 size=    1280KiB time=00:00:05.20 bitrate=2016.6kbits/s speed=0.84x    
+FFmpeg StdErr:frame=  134 fps= 20 q=15.0 size=    1280KiB time=00:00:05.65 bitrate=1856.0kbits/s speed=0.842x    
+FFmpeg StdErr:frame=  145 fps= 20 q=13.0 size=    1536KiB time=00:00:06.01 bitrate=2091.4kbits/s speed=0.833x    
+FFmpeg StdErr:frame=  155 fps= 20 q=13.0 size=    1536KiB time=00:00:06.43 bitrate=1956.0kbits/s speed=0.832x    
+FFmpeg StdErr:frame=  163 fps= 20 q=13.0 size=    1536KiB time=00:00:06.83 bitrate=1841.5kbits/s speed=0.827x    
+FFmpeg StdErr:frame=  171 fps= 19 q=14.0 size=    1536KiB time=00:00:07.21 bitrate=1743.6kbits/s speed=0.823x    
+FFmpeg StdErr:frame=  179 fps= 19 q=15.0 size=    1536KiB time=00:00:07.60 bitrate=1655.7kbits/s speed=0.818x    
+FFmpeg StdErr:frame=  187 fps= 19 q=14.0 size=    1536KiB time=00:00:08.06 bitrate=1559.9kbits/s speed=0.823x    
+FFmpeg StdErr:frame=  195 fps= 19 q=12.0 size=    1792KiB time=00:00:08.65 bitrate=1697.2kbits/s speed=0.838x    
+FFmpeg StdErr:frame=  205 fps= 19 q=16.0 size=    1792KiB time=00:00:09.25 bitrate=1587.1kbits/s speed=0.854x    
+FFmpeg StdErr:frame=  214 fps= 19 q=12.0 size=    2048KiB time=00:00:09.85 bitrate=1703.3kbits/s speed=0.867x    
+FFmpeg StdErr:frame=  223 fps= 19 q=12.0 size=    2048KiB time=00:00:10.43 bitrate=1608.1kbits/s speed=0.879x    
+FFmpeg StdErr:frame=  232 fps= 19 q=15.0 size=    2048KiB time=00:00:10.91 bitrate=1536.9kbits/s speed=0.881x    
+FFmpeg StdErr:frame=  239 fps= 19 q=12.0 size=    2048KiB time=00:00:11.31 bitrate=1482.6kbits/s speed=0.878x    
+FFmpeg StdErr:frame=  246 fps= 18 q=12.0 size=    2048KiB time=00:00:11.71 bitrate=1431.9kbits/s speed=0.874x    
+FFmpeg StdErr:frame=  253 fps= 18 q=13.0 size=    2304KiB time=00:00:12.10 bitrate=1559.9kbits/s speed=0.869x    
+FFmpeg StdErr:frame=  261 fps= 18 q=12.0 size=    2304KiB time=00:00:12.60 bitrate=1498.0kbits/s speed=0.873x    
+FFmpeg StdErr:frame=  267 fps= 18 q=11.0 size=    2304KiB time=00:00:13.01 bitrate=1450.0kbits/s speed=0.87x    
+FFmpeg StdErr:frame=  274 fps= 18 q=13.0 size=    2304KiB time=00:00:13.51 bitrate=1396.4kbits/s speed=0.873x    
+FFmpeg StdErr:frame=  281 fps= 18 q=12.0 size=    2304KiB time=00:00:14.01 bitrate=1346.6kbits/s speed=0.876x    
+FFmpeg StdErr:frame=  287 fps= 17 q=12.0 size=    2304KiB time=00:00:14.41 bitrate=1309.2kbits/s speed=0.874x    
+FFmpeg StdErr:frame=  294 fps= 17 q=13.0 size=    2304KiB time=00:00:15.05 bitrate=1254.1kbits/s speed=0.884x    
+FFmpeg StdErr:frame=  300 fps= 17 q=12.0 size=    2304KiB time=00:00:15.46 bitrate=1220.4kbits/s speed=0.882x    
+FFmpeg StdErr:frame=  308 fps= 17 q=13.0 size=    2560KiB time=00:00:16.08 bitrate=1304.0kbits/s speed=0.891x    
+FFmpeg StdErr:frame=  314 fps= 17 q=12.0 size=    2560KiB time=00:00:16.58 bitrate=1264.6kbits/s speed=0.893x    
+FFmpeg StdErr:frame=  321 fps= 17 q=12.0 size=    2560KiB time=00:00:17.11 bitrate=1225.2kbits/s speed=0.897x    
+FFmpeg StdErr:frame=  328 fps= 17 q=12.0 size=    2560KiB time=00:00:17.66 bitrate=1187.1kbits/s speed=0.901x    
+FFmpeg StdErr:frame=  336 fps= 17 q=13.0 size=    2560KiB time=00:00:18.20 bitrate=1152.3kbits/s speed=0.905x    
+FFmpeg StdErr:frame=  342 fps= 17 q=13.0 size=    2560KiB time=00:00:18.68 bitrate=1122.5kbits/s speed=0.905x    
+FFmpeg StdErr:frame=  349 fps= 17 q=12.0 size=    2560KiB time=00:00:19.20 bitrate=1092.3kbits/s speed=0.908x    
+FFmpeg StdErr:frame=  354 fps= 16 q=12.0 size=    2560KiB time=00:00:19.58 bitrate=1070.9kbits/s speed=0.904x    
+FFmpeg StdErr:frame=  361 fps= 16 q=12.0 size=    2560KiB time=00:00:20.10 bitrate=1043.4kbits/s speed=0.906x    
+FFmpeg StdErr:frame=  367 fps= 16 q=12.0 size=    2560KiB time=00:00:20.51 bitrate=1022.2kbits/s speed=0.904x    
+FFmpeg StdErr:frame=  373 fps= 16 q=11.0 size=    2560KiB time=00:00:20.98 bitrate= 999.5kbits/s speed=0.904x    
+FFmpeg StdErr:frame=  379 fps= 16 q=12.0 size=    2560KiB time=00:00:21.48 bitrate= 976.2kbits/s speed=0.906x    
+FFmpeg StdErr:frame=  385 fps= 16 q=12.0 size=    2560KiB time=00:00:22.01 bitrate= 952.5kbits/s speed=0.908x    
+FFmpeg StdErr:frame=  391 fps= 16 q=12.0 size=    2560KiB time=00:00:22.53 bitrate= 930.7kbits/s speed=0.91x    
+FFmpeg StdErr:frame=  398 fps= 16 q=12.0 size=    2560KiB time=00:00:23.08 bitrate= 908.5kbits/s speed=0.913x    
+FFmpeg StdErr:frame=  403 fps= 16 q=11.0 size=    2816KiB time=00:00:23.53 bitrate= 980.3kbits/s speed=0.913x    
+FFmpeg StdErr:frame=  409 fps= 16 q=12.0 size=    2816KiB time=00:00:24.05 bitrate= 959.2kbits/s speed=0.914x    
+FFmpeg StdErr:frame=  414 fps= 15 q=12.0 size=    2816KiB time=00:00:24.43 bitrate= 944.2kbits/s speed=0.911x    
+FFmpeg StdErr:frame=  420 fps= 15 q=12.0 size=    2816KiB time=00:00:25.00 bitrate= 922.8kbits/s speed=0.914x    
+FFmpeg StdErr:frame=  426 fps= 15 q=12.0 size=    2816KiB time=00:00:25.46 bitrate= 905.9kbits/s speed=0.914x    
+FFmpeg StdErr:frame=  433 fps= 15 q=13.0 size=    2816KiB time=00:00:26.13 bitrate= 882.7kbits/s speed=0.921x    
+FFmpeg StdErr:frame=  440 fps= 15 q=13.0 size=    2816KiB time=00:00:26.76 bitrate= 861.9kbits/s speed=0.927x    
+FFmpeg StdErr:frame=  447 fps= 15 q=12.0 size=    2816KiB time=00:00:27.36 bitrate= 843.0kbits/s speed=0.931x    
+FFmpeg StdErr:frame=  452 fps= 15 q=12.0 size=    2816KiB time=00:00:27.85 bitrate= 828.3kbits/s speed=0.931x    
+FFmpeg StdErr:frame=  460 fps= 15 q=13.0 size=    2816KiB time=00:00:28.43 bitrate= 811.3kbits/s speed=0.934x    
+FFmpeg StdErr:frame=  467 fps= 15 q=12.0 size=    2816KiB time=00:00:28.93 bitrate= 797.3kbits/s speed=0.934x    
+FFmpeg StdErr:frame=  473 fps= 15 q=13.0 size=    2816KiB time=00:00:29.40 bitrate= 784.7kbits/s speed=0.934x    
+FFmpeg StdErr:frame=  479 fps= 15 q=17.0 size=    2816KiB time=00:00:30.00 bitrate= 769.0kbits/s speed=0.938x    
+FFmpeg StdErr:frame=  486 fps= 15 q=13.0 size=    2816KiB time=00:00:30.46 bitrate= 757.2kbits/s speed=0.937x    
+FFmpeg StdErr:frame=  493 fps= 15 q=13.0 size=    2816KiB time=00:00:30.95 bitrate= 745.4kbits/s speed=0.937x    
+FFmpeg StdErr:frame=  499 fps= 15 q=12.0 size=    3072KiB time=00:00:31.40 bitrate= 801.5kbits/s speed=0.936x    
+FFmpeg StdErr:frame=  506 fps= 15 q=12.0 size=    3072KiB time=00:00:32.06 bitrate= 784.8kbits/s speed=0.942x    
+FFmpeg StdErr:frame=  512 fps= 15 q=12.0 size=    3072KiB time=00:00:32.51 bitrate= 773.9kbits/s speed=0.941x    
+FFmpeg StdErr:frame=  519 fps= 15 q=13.0 size=    3072KiB time=00:00:33.01 bitrate= 762.2kbits/s speed=0.941x    
+FFmpeg StdErr:frame=  526 fps= 15 q=13.0 size=    3072KiB time=00:00:33.58 bitrate= 749.4kbits/s speed=0.943x    
+FFmpeg StdErr:frame=  533 fps= 15 q=12.0 size=    3072KiB time=00:00:34.10 bitrate= 738.0kbits/s speed=0.944x    
+FFmpeg StdErr:frame=  540 fps= 15 q=12.0 size=    3328KiB time=00:00:34.68 bitrate= 786.1kbits/s speed=0.947x    
+FFmpeg StdErr:frame=  547 fps= 15 q=12.0 size=    3328KiB time=00:00:35.18 bitrate= 774.9kbits/s speed=0.947x    
+FFmpeg StdErr:frame=  553 fps= 15 q=12.0 size=    3328KiB time=00:00:35.63 bitrate= 765.1kbits/s speed=0.946x    
+FFmpeg StdErr:frame=  560 fps= 15 q=12.0 size=    3328KiB time=00:00:36.16 bitrate= 753.8kbits/s speed=0.947x    
+FFmpeg StdErr:frame=  567 fps= 15 q=13.0 size=    3328KiB time=00:00:36.73 bitrate= 742.2kbits/s speed=0.949x    
+FFmpeg StdErr:frame=  574 fps= 15 q=13.0 size=    3328KiB time=00:00:37.23 bitrate= 732.2kbits/s speed=0.95x    
+FFmpeg StdErr:frame=  581 fps= 15 q=12.0 size=    3328KiB time=00:00:37.78 bitrate= 721.6kbits/s speed=0.951x    
+FFmpeg StdErr:frame=  588 fps= 15 q=13.0 size=    3328KiB time=00:00:38.26 bitrate= 712.5kbits/s speed=0.951x    
+FFmpeg StdErr:frame=  595 fps= 15 q=12.0 size=    3328KiB time=00:00:38.83 bitrate= 702.1kbits/s speed=0.953x    
+FFmpeg StdErr:frame=  602 fps= 15 q=12.0 size=    3328KiB time=00:00:39.30 bitrate= 693.7kbits/s speed=0.952x    
+FFmpeg StdErr:frame=  607 fps= 15 q=12.0 size=    3328KiB time=00:00:39.71 bitrate= 686.4kbits/s speed=0.95x    
+FFmpeg StdErr:frame=  613 fps= 14 q=12.0 size=    3328KiB time=00:00:40.11 bitrate= 679.6kbits/s speed=0.948x    
+FFmpeg StdErr:frame=  618 fps= 14 q=11.0 size=    3328KiB time=00:00:40.55 bitrate= 672.3kbits/s speed=0.947x    
+FFmpeg StdErr:frame=  625 fps= 14 q=12.0 size=    3328KiB time=00:00:41.03 bitrate= 664.4kbits/s speed=0.947x    
+FFmpeg StdErr:frame=  633 fps= 14 q=13.0 size=    3328KiB time=00:00:41.75 bitrate= 653.0kbits/s speed=0.952x    
+FFmpeg StdErr:frame=  641 fps= 14 q=13.0 size=    3584KiB time=00:00:42.45 bitrate= 691.6kbits/s speed=0.957x    
+FFmpeg StdErr:frame=  647 fps= 14 q=12.0 size=    3584KiB time=00:00:43.03 bitrate= 682.3kbits/s speed=0.959x    
+FFmpeg StdErr:frame=  654 fps= 14 q=13.0 size=    3584KiB time=00:00:43.48 bitrate= 675.2kbits/s speed=0.958x    
+FFmpeg StdErr:frame=  660 fps= 14 q=11.0 size=    3584KiB time=00:00:43.90 bitrate= 668.8kbits/s speed=0.956x    
+FFmpeg StdErr:frame=  666 fps= 14 q=13.0 size=    3584KiB time=00:00:44.30 bitrate= 662.8kbits/s speed=0.954x    
+FFmpeg StdErr:frame=  672 fps= 14 q=12.0 size=    3584KiB time=00:00:44.75 bitrate= 656.1kbits/s speed=0.953x    
+FFmpeg StdErr:frame=  678 fps= 14 q=12.0 size=    3584KiB time=00:00:45.21 bitrate= 649.3kbits/s speed=0.953x    
+FFmpeg StdErr:frame=  686 fps= 14 q=14.0 size=    3584KiB time=00:00:45.88 bitrate= 639.9kbits/s speed=0.956x    
+FFmpeg StdErr:frame=  693 fps= 14 q=11.0 size=    3584KiB time=00:00:46.45 bitrate= 632.1kbits/s speed=0.958x    
+FFmpeg StdErr:frame=  700 fps= 14 q=11.0 size=    3584KiB time=00:00:47.06 bitrate= 623.8kbits/s speed=0.96x    
+FFmpeg StdErr:frame=  707 fps= 14 q=22.0 size=    3584KiB time=00:00:47.68 bitrate= 615.7kbits/s speed=0.963x    
+FFmpeg StdErr:frame=  714 fps= 14 q=12.0 size=    3584KiB time=00:00:48.13 bitrate= 610.0kbits/s speed=0.962x    
+FFmpeg StdErr:frame=  721 fps= 14 q=11.0 size=    3584KiB time=00:00:48.66 bitrate= 603.3kbits/s speed=0.962x    
+FFmpeg StdErr:frame=  727 fps= 14 q=11.0 size=    3584KiB time=00:00:49.13 bitrate= 597.6kbits/s speed=0.962x    
+FFmpeg StdErr:frame=  734 fps= 14 q=13.0 size=    4096KiB time=00:00:49.63 bitrate= 676.1kbits/s speed=0.962x    
+FFmpeg StdErr:frame=  741 fps= 14 q=11.0 size=    4096KiB time=00:00:50.10 bitrate= 669.8kbits/s speed=0.961x    
+FFmpeg StdErr:[q] command received. Exiting.
+FFmpeg StdErr:[out#0/mp4 @ 0000027cefb386c0] video:4824KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.162486%
+FFmpeg StdErr:frame=  775 fps= 15 q=-1.0 Lsize=    4832KiB time=00:00:52.56 bitrate= 753.0kbits/s speed=0.998x    
+FFmpeg StdErr:[libx264 @ 0000027cefb3c000] frame I:4     Avg QP:12.00  size:232860
+FFmpeg StdErr:[libx264 @ 0000027cefb3c000] frame P:771   Avg QP:13.03  size:  5198
+FFmpeg StdErr:[libx264 @ 0000027cefb3c000] mb I  I16..4: 100.0%  0.0%  0.0%
+FFmpeg StdErr:[libx264 @ 0000027cefb3c000] mb P  I16..4:  1.7%  0.0%  0.0%  P16..4:  3.1%  0.0%  0.0%  0.0%  0.0%    skip:95.1%
+FFmpeg StdErr:[libx264 @ 0000027cefb3c000] coded y,uvDC,uvAC intra: 21.2% 12.3% 10.7% inter: 1.0% 1.7% 0.4%
+FFmpeg StdErr:[libx264 @ 0000027cefb3c000] i16 v,h,dc,p: 67% 29%  3%  1%
+FFmpeg StdErr:[libx264 @ 0000027cefb3c000] i8c dc,h,v,p: 79% 13%  7%  1%
+FFmpeg StdErr:[libx264 @ 0000027cefb3c000] kb/s:750.93
