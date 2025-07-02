@@ -114,13 +114,15 @@ namespace プロコン部チーム_0622_TEST
 
             recorder = new FFmpegRecorder();
 
-            string folderPath = Path.Combine(AppState.FolderPath, AppState.FolderName);
-            Directory.CreateDirectory(folderPath); // 存在しない場合でも安全に作成されます
+            //フォルダ作成機能
+
+            //string folderPath = Path.Combine(AppState.FolderPath, AppState.FolderName);
+            //Directory.CreateDirectory(folderPath); // 存在しない場合でも安全に作成されます
 
             string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
             string outputFile = $"recording_{timestamp}.mp4";// 出力ファイル名（必要に応じてパスも指定可）
 
-            string outputFilePath = Path.Combine(folderPath, outputFile);//出力先パス、ファイル名をグローバルな変数から持ってくる
+            string outputFilePath = Path.Combine(Properties.Settings.Default.folderpath, outputFile);//出力先パス、ファイル名をグローバルな変数から持ってくる
             recorder.StartRecording(outputFilePath);
 
         }

@@ -1,0 +1,13 @@
+C:\VisualStudio\プロコン部チーム_0622_TEST\bin\Debug\プロコン部チーム_0622_TEST.exe.config
+C:\VisualStudio\プロコン部チーム_0622_TEST\bin\Debug\プロコン部チーム_0622_TEST.exe
+C:\VisualStudio\プロコン部チーム_0622_TEST\bin\Debug\プロコン部チーム_0622_TEST.pdb
+C:\VisualStudio\プロコン部チーム_0622_TEST\obj\Debug\プロコン部チーム_0622_TEST.csproj.AssemblyReference.cache
+C:\VisualStudio\プロコン部チーム_0622_TEST\obj\Debug\プロコン部チーム_0622_TEST.Form1.resources
+C:\VisualStudio\プロコン部チーム_0622_TEST\obj\Debug\プロコン部チーム_0622_TEST.Properties.Resources.resources
+C:\VisualStudio\プロコン部チーム_0622_TEST\obj\Debug\プロコン部チーム_0622_TEST.csproj.GenerateResource.cache
+C:\VisualStudio\プロコン部チーム_0622_TEST\obj\Debug\プロコン部チーム_0622_TEST.csproj.CoreCompileInputs.cache
+C:\VisualStudio\プロコン部チーム_0622_TEST\obj\Debug\プロコン部チーム_0622_TEST.exe
+C:\VisualStudio\プロコン部チーム_0622_TEST\obj\Debug\プロコン部チーム_0622_TEST.pdb
+C:\VisualStudio\プロコン部チーム_0622_TEST\obj\Debug\プロコン部チーム_0622_TEST.exe.config
+C:\VisualStudio\プロコン部チーム_0622_TEST\obj\Debug\プロコン部チーム_0622_TEST.Form2.resources
+C:\VisualStudio\プロコン部チーム_0622_TEST\obj\Debug\プロコン部チーム_0622_TEST.Form3.resources

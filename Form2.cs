@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace プロコン部チーム_0622_TEST
 {
-      public partial class Form2 : Form
+    public partial class Form2 : Form
     {
         int Recordtime; //録画したい時間
 
@@ -28,6 +28,7 @@ namespace プロコン部チーム_0622_TEST
         private void Form2_Load(object sender, EventArgs e)
         {
             textBox1.ReadOnly = true;
+            textBox1.Text = Properties.Settings.Default.folderpath;     // 設定からフォルダパスを取得
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,11 +38,12 @@ namespace プロコン部チーム_0622_TEST
 
         }
 
-      
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-           
+
         }
+
 
 
         private void button2_Click(object sender, EventArgs e)
@@ -79,10 +81,12 @@ namespace プロコン部チーム_0622_TEST
             {
                 if (fbd.ShowDialog() == DialogResult.OK)
                 {
-                    textBox1.Text = fbd.SelectedPath;
-                    AppState.FolderPath = textBox1.Text;
+                    Properties.Settings.Default.folderpath = fbd.SelectedPath;
+                    Properties.Settings.Default.Save();
+                    AppState.FolderPath = Properties.Settings.Default.folderpath;
                 }
             }
+            textBox1.Text = Properties.Settings.Default.folderpath;
             MessageBox.Show("出力ファイルのパス指定が完了しました。");
         }
 
