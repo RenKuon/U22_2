@@ -37,3 +37,16 @@ C:\VisualStudio\U22\ProconTeam\obj\Debug\ProconTeam_App.cs.csproj.GenerateResour
 C:\VisualStudio\U22\ProconTeam\obj\Debug\ProconTeam_App.cs.csproj.CoreCompileInputs.cache
 C:\VisualStudio\U22\ProconTeam\obj\Debug\プロコン部チーム_0622_TEST.exe
 C:\VisualStudio\U22\ProconTeam\obj\Debug\プロコン部チーム_0622_TEST.pdb
+C:\VisualStudio\U22\ProconTeam_clone\bin\Debug\プロコン部チーム_0622_TEST.exe.config
+C:\VisualStudio\U22\ProconTeam_clone\bin\Debug\プロコン部チーム_0622_TEST.exe
+C:\VisualStudio\U22\ProconTeam_clone\bin\Debug\プロコン部チーム_0622_TEST.pdb
+C:\VisualStudio\U22\ProconTeam_clone\obj\Debug\ProconTeam_App.cs.csproj.AssemblyReference.cache
+C:\VisualStudio\U22\ProconTeam_clone\obj\Debug\プロコン部チーム_0622_TEST.exe.config
+C:\VisualStudio\U22\ProconTeam_clone\obj\Debug\プロコン部チーム_0622_TEST.Form1.resources
+C:\VisualStudio\U22\ProconTeam_clone\obj\Debug\プロコン部チーム_0622_TEST.Form2.resources
+C:\VisualStudio\U22\ProconTeam_clone\obj\Debug\プロコン部チーム_0622_TEST.Form3.resources
+C:\VisualStudio\U22\ProconTeam_clone\obj\Debug\プロコン部チーム_0622_TEST.Properties.Resources.resources
+C:\VisualStudio\U22\ProconTeam_clone\obj\Debug\ProconTeam_App.cs.csproj.GenerateResource.cache
+C:\VisualStudio\U22\ProconTeam_clone\obj\Debug\ProconTeam_App.cs.csproj.CoreCompileInputs.cache
+C:\VisualStudio\U22\ProconTeam_clone\obj\Debug\プロコン部チーム_0622_TEST.exe
+C:\VisualStudio\U22\ProconTeam_clone\obj\Debug\プロコン部チーム_0622_TEST.pdb

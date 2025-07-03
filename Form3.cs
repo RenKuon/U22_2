@@ -48,6 +48,14 @@ namespace プロコン部チーム_0622_TEST
             {
                 process.WaitForExit();
             }
+
+            string input_filename = Path.GetFileName(input_filepath);       //元のファイル名を取得
+            File.Delete(input_filepath); //元のファイルを削除
+
+            File.Move(output_filepath, Path.Combine(Properties.Settings.Default.folderpath, input_filename));//カット後のファイルを元のファイル名に変更
+
+
+
         }
     }
 }
