@@ -17,10 +17,12 @@ namespace プロコン部チーム_0622_TEST
         public Form3()
         {
             InitializeComponent();
+
         }
 
         private void Form3_Load(object sender, EventArgs e)
         {
+            axWindowsMediaPlayer1.uiMode = "none";
 
         }
 
@@ -57,5 +59,48 @@ namespace プロコン部チーム_0622_TEST
 
 
         }
+
+
+
+        //再生
+        private void playbutton_Click(object sender, EventArgs e)
+        {
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+        }
+
+        //一時停止
+        private void pausebutton_Click(object sender, EventArgs e)
+        {
+            axWindowsMediaPlayer1.Ctlcontrols.pause();
+        }
+
+        //ファイル参照
+        private void input_file_button_Click(object sender, EventArgs e)
+        {
+            string set_filepath = @"C:\";
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "ファイル選択";
+                ofd.InitialDirectory = set_filepath;
+                ofd.Filter = "MP4ファイル|*.mp4";
+                ofd.CheckFileExists = true;
+                ofd.CheckPathExists = true;
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    string select_mp4_filepath = ofd.FileName;
+
+
+                    axWindowsMediaPlayer1.URL = select_mp4_filepath;
+                }
+                else
+                {
+                    MessageBox.Show("キャンセルまたはエラー", "通知");
+                }
+            }
+        }
+
+
     }
 }
+
