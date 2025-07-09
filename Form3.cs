@@ -14,6 +14,9 @@ namespace プロコン部チーム_0622_TEST
 {
     public partial class Form3 : Form
     {
+        //トラックバー操作中の排他制御用変数
+        private bool trackbar_mouseup = false;
+
         public Form3()
         {
             InitializeComponent();
@@ -101,6 +104,62 @@ namespace プロコン部チーム_0622_TEST
         }
 
 
+        //プレビューの再生時間の更新
+        private void axWindowsMediaPlayer1_OpenStateChange(object sender, AxWMPLib._WMPOCXEvents_OpenStateChangeEvent e)
+        {
+            if (axWindowsMediaPlayer1.openState == WMPLib.WMPOpenState.wmposMediaOpen)
+            {
+                double tolal_time = axWindowsMediaPlayer1.currentMedia.duration; //動画の総秒数の取得
+
+
+                //trackbarに動画の総秒数を反映
+                movie_trackbar.Maximum = (int)(tolal_time * 1000);  //秒数をミリ秒として扱う
+                movie_trackbar.Minimum = 0; //最小値は0に設定
+                movie_trackbar.Value = 0; //初期値は0に設定
+
+                //labelに動画の総秒数を表示
+                TimeSpan total_timespan = TimeSpan.FromSeconds(tolal_time);
+                time_display_label.Text = $"00:00:00.00 / {total_timespan.Hours:D2}:{total_timespan.Minutes:D2}:{total_timespan.Seconds:D2}"; //HH:MM:SS形式で表示
+
+                timer1.Start(); // 動画がロードされたらタイマーを開始
+            }
+        }
+
+        //時間を反映
+        private void update_timer_tick(object sender, EventArgs e)
+        {
+            if (axWindowsMediaPlayer1.currentMedia != null && axWindowsMediaPlayer1.Ctlcontrols.currentPosition >= 0)
+            {
+                if (trackbar_mouseup == false)// トラックバー操作中でない場合のみ更新 
+                {
+                    int currentPosition_value = (int)(axWindowsMediaPlayer1.Ctlcontrols.currentPosition);
+                    int trackbar_value = (int)(currentPosition_value * 1000); // 秒をミリ秒に変換
+
+                    if (trackbar_value >= movie_trackbar.Minimum && trackbar_value <= movie_trackbar.Maximum)
+                    {
+                        movie_trackbar.Value = trackbar_value;
+                    }
+
+                }
+
+                // 時間表示ラベルを更新
+                TimeSpan current = TimeSpan.FromSeconds(axWindowsMediaPlayer1.Ctlcontrols.currentPosition);
+                TimeSpan total = TimeSpan.FromSeconds(axWindowsMediaPlayer1.currentMedia.duration);
+                time_display_label.Text = $"{current.ToString(@"hh\:mm\:ss\.ff")} / {total.ToString(@"hh\:mm\:ss\.ff")}";
+
+            }
+        }
+
+        private void movie_trackbar_MouseUp(object sender, MouseEventArgs e)
+        {
+            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = movie_trackbar.Value / 1000.0;
+            trackbar_mouseup = false;
+        }
+
+        private void movie_trackbar_MouseDown(object sender, MouseEventArgs e)
+        {
+            trackbar_mouseup = true;
+        }
     }
 }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.button1 = new System.Windows.Forms.Button();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
@@ -35,8 +36,12 @@
             this.pausebutton = new System.Windows.Forms.Button();
             this.playbutton = new System.Windows.Forms.Button();
             this.input_file_button = new System.Windows.Forms.Button();
+            this.time_display_label = new System.Windows.Forms.Label();
+            this.movie_trackbar = new System.Windows.Forms.TrackBar();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.movie_trackbar)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -61,6 +66,7 @@
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
             this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(909, 374);
             this.axWindowsMediaPlayer1.TabIndex = 1;
+            this.axWindowsMediaPlayer1.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.axWindowsMediaPlayer1_OpenStateChange);
             // 
             // tableLayoutPanel1
             // 
@@ -76,6 +82,8 @@
             this.tableLayoutPanel1.Controls.Add(this.playbutton, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.input_file_button, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.button1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.time_display_label, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.movie_trackbar, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -85,7 +93,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1212, 630);
             this.tableLayoutPanel1.TabIndex = 2;
-
             // 
             // pausebutton
             // 
@@ -124,6 +131,32 @@
             this.input_file_button.UseVisualStyleBackColor = true;
             this.input_file_button.Click += new System.EventHandler(this.input_file_button_Click);
             // 
+            // time_display_label
+            // 
+            this.time_display_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.time_display_label.AutoSize = true;
+            this.time_display_label.Location = new System.Drawing.Point(51, 380);
+            this.time_display_label.Name = "time_display_label";
+            this.time_display_label.Size = new System.Drawing.Size(195, 18);
+            this.time_display_label.TabIndex = 6;
+            this.time_display_label.Text = "00:00:00.00 / 00:00:00.00";
+            this.time_display_label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // movie_trackbar
+            // 
+            this.movie_trackbar.Location = new System.Drawing.Point(3, 3);
+            this.movie_trackbar.Maximum = 1000;
+            this.movie_trackbar.Name = "movie_trackbar";
+            this.movie_trackbar.Size = new System.Drawing.Size(272, 69);
+            this.movie_trackbar.TabIndex = 7;
+            this.movie_trackbar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.movie_trackbar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.movie_trackbar_MouseDown);
+            this.movie_trackbar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.movie_trackbar_MouseUp);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.update_timer_tick);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
@@ -136,6 +169,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.movie_trackbar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -148,5 +182,8 @@
         private System.Windows.Forms.Button playbutton;
         private System.Windows.Forms.Button pausebutton;
         private System.Windows.Forms.Button input_file_button;
+        private System.Windows.Forms.Label time_display_label;
+        private System.Windows.Forms.TrackBar movie_trackbar;
+        private System.Windows.Forms.Timer timer1;
     }
 }
