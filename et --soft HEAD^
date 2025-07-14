@@ -1,0 +1,34 @@
+[33md516b8b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m カットの時間指定機能を追加
+[33mabfcdb4[m Form3編集機能に簡易的な動画プレビューを追加しました
+[33mab969cf[m Merge branch 'main' of https://github.com/RenKuon/U22_2
+[33m3c5ddc0[m Form3に簡易的な動画再生プレビューを追加しました
+[33mc9ade13[m Update README.md
+[33m59d0d0b[m Delete tttttteeeeest.md
+[33m19020ff[m こっちみんなぶっ飛ばすぞを追加g
+[33m225f361[m GUIを高DPIに対応させました
+[33m1903a8f[m カット処理を行った動画ファイルのみを保存するように変更しました。.gitignoreを追加しました
+[33me8a9beb[m カット処理を行った動画ファイルのみを保存するように変更しました
+[33m602dcb1[m 簡易的なカット編集機能の追加、結合をしました
+[33ma3e410d[m form1, form2, form3をForm1.cs,Form2.cs,Form3.csに変更しました
+[33m2271bbb[m 出力フォルダを設定ファイルに記述、引き継ぎ可能に
+[33mffd5688[m 最初のコミット
+[33mb0d6158[m Update form2
+[33m9e203e0[m Create form3
+[33m4afc97c[m Create form2
+[33m1a556ba[m Delete edit
+[33m154212c[m Update form1
+[33m7396171[m Create form1
+[33m928d1b5[m Update edit
+[33m0179abb[m Create edit
+[33ma4275c0[m Delete ffmpeg directory
+[33mebbcc3d[m Delete cut_cpp directory
+[33mc3108f3[m Delete FFmpeg directory
+[33m8b40959[m Delete ffmpeg/a
+[33m573e71d[m Add files via upload
+[33mb0787aa[m Create a
+[33mf015f6f[m Add files via upload
+[33m2cf44b4[m Delete FFmpeg/a
+[33mb0c4bf2[m Add files via upload
+[33m1970d98[m Create a
+[33m4d6bd72[m Update README.md
+[33mae6d25c[m Initial commit

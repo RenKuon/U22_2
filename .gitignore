@@ -3,6 +3,7 @@
 ################################################################################
 
 /bin/Debug/logs
+.vs/
 
 # Created by https://www.toptal.com/developers/gitignore/api/csharp,visualstudio,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=csharp,visualstudio,windows
