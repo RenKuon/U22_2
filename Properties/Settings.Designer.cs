@@ -46,5 +46,29 @@ namespace プロコン部チーム_0622_TEST.Properties {
                 this["raw_movie_filepath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string cut_start_time {
+            get {
+                return ((string)(this["cut_start_time"]));
+            }
+            set {
+                this["cut_start_time"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string cut_end_time {
+            get {
+                return ((string)(this["cut_end_time"]));
+            }
+            set {
+                this["cut_end_time"] = value;
+            }
+        }
     }
 }
