@@ -26,8 +26,8 @@ namespace プロコン部チーム_0622_TEST
         private void Form3_Load(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.uiMode = "none";
-            Properties.Settings.Default.cut_start_time = "00:00:00.00"; //カット開始時間の初期値
-            Properties.Settings.Default.cut_end_time = "00:00:00.00";   //カット終了時間の初期値
+            Properties.Settings.Default.cut_start_time = TimeSpan.Zero; //カット開始時間の初期値
+            Properties.Settings.Default.cut_end_time = TimeSpan.Zero;   //カット終了時間の初期値
 
             axWindowsMediaPlayer1.URL = Properties.Settings.Default.raw_movie_filepath; //settingsファイルから動画のパスを読み込み
 
@@ -35,14 +35,21 @@ namespace プロコン部チーム_0622_TEST
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string input_filepath = Properties.Settings.Default.raw_movie_filepath;     //出力ファイルパスを.settingsファイルから読み込み
-            string output_filepath = Path.Combine(Properties.Settings.Default.folderpath, "cut_output.mp4"); //カット後のファイルの保存先パス
-            string start_time = Properties.Settings.Default.cut_start_time;                           //カットする範囲の開始地点の指定変数
-            string end_time = Properties.Settings.Default.cut_end_time;                               //カットする範囲の終了地点の指定変数
+            string input_filepath = Properties.Settings.Default.raw_movie_filepath;     //インスタントリプレイの保存ファイルパスを.settingsファイルから読み込み
+            string input_filename = Path.GetFileName(input_filepath);       //元のファイル名を取得
+
+            string output_filename = input_filename + "cut_output.mp4";
+
+            string output_filepath = Path.Combine(Properties.Settings.Default.folderpath, output_filename); //カット後のファイルの保存先パス
+            TimeSpan start_time = Properties.Settings.Default.cut_start_time;                           //カットする範囲の開始地点の指定変数
+            TimeSpan end_time = Properties.Settings.Default.cut_end_time;                               //カットする範囲の終了地点の指定変数
+
+
 
 
             //カット処理
-            string ffmpegCommand = $"ffmpeg -i \"{input_filepath}\" -ss {start_time} -to {end_time} -c copy \"{output_filepath}\"";
+            string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c:v libx264 -preset medium -crf 23 -c:a aac -b:a 128k \"{output_filepath}\"";
+            //string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c copy \"{output_filepath}\"";
 
             //バックグラウンドでの処理
             ProcessStartInfo processInfo = new ProcessStartInfo
@@ -58,7 +65,7 @@ namespace プロコン部チーム_0622_TEST
                 process.WaitForExit();
             }
 
-            string input_filename = Path.GetFileName(input_filepath);       //元のファイル名を取得
+
 
             if (output_filepath == input_filepath)
             {
@@ -177,13 +184,13 @@ namespace プロコン部チーム_0622_TEST
             // Spaceキーが押されたかを判定
             if (e.KeyCode == Keys.C)
             {
-                Properties.Settings.Default.cut_start_time = TimeSpan.FromSeconds(axWindowsMediaPlayer1.Ctlcontrols.currentPosition).ToString();
+                Properties.Settings.Default.cut_start_time = TimeSpan.FromSeconds(axWindowsMediaPlayer1.Ctlcontrols.currentPosition);
                 cut_start_time_display_label.Text = $"カット開始時間: {Properties.Settings.Default.cut_start_time}";
             }
 
             if (e.KeyCode == Keys.V)
             {
-                Properties.Settings.Default.cut_end_time = TimeSpan.FromSeconds(axWindowsMediaPlayer1.Ctlcontrols.currentPosition).ToString();
+                Properties.Settings.Default.cut_end_time = TimeSpan.FromSeconds(axWindowsMediaPlayer1.Ctlcontrols.currentPosition);
                 cut_end_time_display_label.Text = $"カット終了時間: {Properties.Settings.Default.cut_end_time}";
             }
         }

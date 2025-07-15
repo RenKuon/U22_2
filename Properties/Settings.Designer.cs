@@ -49,10 +49,10 @@ namespace プロコン部チーム_0622_TEST.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string cut_start_time {
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:00")]
+        public global::System.TimeSpan cut_start_time {
             get {
-                return ((string)(this["cut_start_time"]));
+                return ((global::System.TimeSpan)(this["cut_start_time"]));
             }
             set {
                 this["cut_start_time"] = value;
@@ -61,10 +61,10 @@ namespace プロコン部チーム_0622_TEST.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string cut_end_time {
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:00")]
+        public global::System.TimeSpan cut_end_time {
             get {
-                return ((string)(this["cut_end_time"]));
+                return ((global::System.TimeSpan)(this["cut_end_time"]));
             }
             set {
                 this["cut_end_time"] = value;
