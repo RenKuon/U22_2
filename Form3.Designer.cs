@@ -40,7 +40,10 @@
             this.time_display_label = new System.Windows.Forms.Label();
             this.cut_end_time_display_label = new System.Windows.Forms.Label();
             this.cut_start_time_display_label = new System.Windows.Forms.Label();
+            this.output_filename_textbox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.movie_trackbar)).BeginInit();
@@ -89,7 +92,9 @@
             this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.time_display_label, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.cut_end_time_display_label, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.cut_start_time_display_label, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.cut_start_time_display_label, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.output_filename_textbox, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -189,22 +194,55 @@
             this.cut_start_time_display_label.AutoSize = true;
             this.cut_start_time_display_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cut_start_time_display_label.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cut_start_time_display_label.Location = new System.Drawing.Point(3, 280);
+            this.cut_start_time_display_label.Location = new System.Drawing.Point(3, 460);
             this.cut_start_time_display_label.Name = "cut_start_time_display_label";
             this.cut_start_time_display_label.Size = new System.Drawing.Size(194, 60);
             this.cut_start_time_display_label.TabIndex = 9;
             this.cut_start_time_display_label.Text = "カット開始時間: 00:00.00";
             this.cut_start_time_display_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // output_filename_textbox
+            // 
+            this.output_filename_textbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.output_filename_textbox.Location = new System.Drawing.Point(3, 283);
+            this.output_filename_textbox.Name = "output_filename_textbox";
+            this.output_filename_textbox.Size = new System.Drawing.Size(194, 25);
+            this.output_filename_textbox.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(3, 256);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(187, 24);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "出力するファイル名";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.update_timer_tick);
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(450, 250);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(200, 100);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "実行中です";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Visible = false;
             // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1078, 644);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(1100, 700);
@@ -233,5 +271,8 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label cut_end_time_display_label;
         private System.Windows.Forms.Label cut_start_time_display_label;
+        private System.Windows.Forms.TextBox output_filename_textbox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
