@@ -49,9 +49,9 @@
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(1077, 509);
+            this.button1.Location = new System.Drawing.Point(931, 523);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 54);
+            this.button1.Size = new System.Drawing.Size(144, 54);
             this.button1.TabIndex = 0;
             this.button1.Text = "カット実行";
             this.button1.UseVisualStyleBackColor = true;
@@ -64,30 +64,30 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.axWindowsMediaPlayer1, 5);
             this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(277, 3);
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(203, 3);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
             this.tableLayoutPanel1.SetRowSpan(this.axWindowsMediaPlayer1, 6);
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(932, 500);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(872, 514);
             this.axWindowsMediaPlayer1.TabIndex = 1;
             this.axWindowsMediaPlayer1.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.axWindowsMediaPlayer1_OpenStateChange);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.Controls.Add(this.playbutton, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.input_file_button, 4, 6);
             this.tableLayoutPanel1.Controls.Add(this.pausebutton, 3, 6);
             this.tableLayoutPanel1.Controls.Add(this.button1, 5, 6);
             this.tableLayoutPanel1.Controls.Add(this.movie_trackbar, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.time_display_label, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.time_display_label, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.cut_end_time_display_label, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.cut_start_time_display_label, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -103,7 +103,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1212, 630);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1078, 644);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // playbutton
@@ -111,9 +111,9 @@
             this.playbutton.AutoSize = true;
             this.playbutton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.playbutton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playbutton.Location = new System.Drawing.Point(414, 509);
+            this.playbutton.Location = new System.Drawing.Point(481, 523);
             this.playbutton.Name = "playbutton";
-            this.playbutton.Size = new System.Drawing.Size(328, 54);
+            this.playbutton.Size = new System.Drawing.Size(144, 54);
             this.playbutton.TabIndex = 2;
             this.playbutton.Text = "▶ 再生";
             this.playbutton.UseVisualStyleBackColor = false;
@@ -123,9 +123,9 @@
             // 
             this.input_file_button.AutoSize = true;
             this.input_file_button.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.input_file_button.Location = new System.Drawing.Point(915, 509);
+            this.input_file_button.Location = new System.Drawing.Point(781, 523);
             this.input_file_button.Name = "input_file_button";
-            this.input_file_button.Size = new System.Drawing.Size(156, 54);
+            this.input_file_button.Size = new System.Drawing.Size(144, 54);
             this.input_file_button.TabIndex = 5;
             this.input_file_button.Text = "参照";
             this.input_file_button.UseVisualStyleBackColor = true;
@@ -135,9 +135,9 @@
             // 
             this.pausebutton.AutoSize = true;
             this.pausebutton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pausebutton.Location = new System.Drawing.Point(748, 509);
+            this.pausebutton.Location = new System.Drawing.Point(631, 523);
             this.pausebutton.Name = "pausebutton";
-            this.pausebutton.Size = new System.Drawing.Size(161, 54);
+            this.pausebutton.Size = new System.Drawing.Size(144, 54);
             this.pausebutton.TabIndex = 4;
             this.pausebutton.Text = "‖ 一時停止";
             this.pausebutton.UseVisualStyleBackColor = true;
@@ -145,11 +145,14 @@
             // 
             // movie_trackbar
             // 
+            this.movie_trackbar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.movie_trackbar, 6);
-            this.movie_trackbar.Location = new System.Drawing.Point(3, 569);
+            this.movie_trackbar.Location = new System.Drawing.Point(3, 583);
             this.movie_trackbar.Maximum = 1000;
             this.movie_trackbar.Name = "movie_trackbar";
-            this.movie_trackbar.Size = new System.Drawing.Size(1205, 58);
+            this.movie_trackbar.Size = new System.Drawing.Size(1072, 58);
             this.movie_trackbar.TabIndex = 7;
             this.movie_trackbar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.movie_trackbar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.movie_trackbar_MouseDown);
@@ -160,9 +163,9 @@
             this.time_display_label.AutoSize = true;
             this.time_display_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.time_display_label.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.time_display_label.Location = new System.Drawing.Point(3, 506);
+            this.time_display_label.Location = new System.Drawing.Point(203, 520);
             this.time_display_label.Name = "time_display_label";
-            this.time_display_label.Size = new System.Drawing.Size(268, 60);
+            this.time_display_label.Size = new System.Drawing.Size(272, 60);
             this.time_display_label.TabIndex = 6;
             this.time_display_label.Text = "00:00.00 / 00:00.00";
             this.time_display_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -174,9 +177,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cut_end_time_display_label.AutoSize = true;
             this.cut_end_time_display_label.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cut_end_time_display_label.Location = new System.Drawing.Point(3, 386);
+            this.cut_end_time_display_label.Location = new System.Drawing.Point(3, 400);
             this.cut_end_time_display_label.Name = "cut_end_time_display_label";
-            this.cut_end_time_display_label.Size = new System.Drawing.Size(268, 60);
+            this.cut_end_time_display_label.Size = new System.Drawing.Size(194, 60);
             this.cut_end_time_display_label.TabIndex = 8;
             this.cut_end_time_display_label.Text = "カット終了時間00:00.00";
             this.cut_end_time_display_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -186,9 +189,9 @@
             this.cut_start_time_display_label.AutoSize = true;
             this.cut_start_time_display_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cut_start_time_display_label.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cut_start_time_display_label.Location = new System.Drawing.Point(3, 266);
+            this.cut_start_time_display_label.Location = new System.Drawing.Point(3, 280);
             this.cut_start_time_display_label.Name = "cut_start_time_display_label";
-            this.cut_start_time_display_label.Size = new System.Drawing.Size(268, 60);
+            this.cut_start_time_display_label.Size = new System.Drawing.Size(194, 60);
             this.cut_start_time_display_label.TabIndex = 9;
             this.cut_start_time_display_label.Text = "カット開始時間: 00:00.00";
             this.cut_start_time_display_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -201,9 +204,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1212, 630);
+            this.ClientSize = new System.Drawing.Size(1078, 644);
             this.Controls.Add(this.tableLayoutPanel1);
             this.KeyPreview = true;
+            this.MinimumSize = new System.Drawing.Size(1100, 700);
             this.Name = "Form3";
             this.Text = "編集";
             this.Load += new System.EventHandler(this.Form3_Load);

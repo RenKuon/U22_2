@@ -20,6 +20,7 @@ namespace プロコン部チーム_0622_TEST
         public Form3()
         {
             InitializeComponent();
+            this.MinimumSize = new System.Drawing.Size(1100, 700);
 
         }
 
@@ -45,38 +46,44 @@ namespace プロコン部チーム_0622_TEST
             TimeSpan end_time = Properties.Settings.Default.cut_end_time;                               //カットする範囲の終了地点の指定変数
 
 
-
-
-            //カット処理
-            string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c:v libx264 -preset medium -crf 23 -c:a aac -b:a 128k \"{output_filepath}\"";
-            //string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c copy \"{output_filepath}\"";
-
-            //バックグラウンドでの処理
-            ProcessStartInfo processInfo = new ProcessStartInfo
+            if (start_time >= end_time)
             {
-                FileName = "cmd.exe",
-                Arguments = $"/c {ffmpegCommand}",
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-
-            using (Process process = Process.Start(processInfo))
-            {
-                process.WaitForExit();
+                MessageBox.Show("カット開始時間はカット終了時間より前に設定してください。", "エラー");
             }
-
-
-
-            if (output_filepath == input_filepath)
+            else
             {
-                File.Delete(input_filepath); //元のファイルを削除
 
-                File.Move(output_filepath, input_filename);//カット後のファイルを元のファイル名に変更
+                //カット処理
+                string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c:v libx264 -preset medium -crf 23 -c:a aac -b:a 128k \"{output_filepath}\"";
+                //string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c copy \"{output_filepath}\"";
+
+                //バックグラウンドでの処理
+                ProcessStartInfo processInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = $"/c {ffmpegCommand}",
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (Process process = Process.Start(processInfo))
+                {
+                    process.WaitForExit();
+                }
+
+
+
+                if (output_filepath == input_filepath)
+                {
+                    File.Delete(input_filepath); //元のファイルを削除
+
+                    File.Move(output_filepath, input_filename);//カット後のファイルを元のファイル名に変更
+                }
+
+
+
+
             }
-
-
-
-
         }
 
 
@@ -176,6 +183,27 @@ namespace プロコン部チーム_0622_TEST
         private void movie_trackbar_MouseDown(object sender, MouseEventArgs e)
         {
             trackbar_mouseup = true;
+
+            // TrackBar の現在のインスタンスを取得
+            TrackBar tb = (TrackBar)sender;
+
+            // クリックされたX座標とTrackBarの幅から、新しい値を計算する
+            // e.X はTrackBarコントロール内での相対X座標
+            // tb.Width はTrackBarコントロールの幅
+
+            // クリック位置をTrackBarの最小値から最大値の範囲にマッピング
+            // (double)e.X / tb.Width はクリック位置の割合 (0.0 ～ 1.0)
+            double clickPercent = (double)e.X / tb.Width;
+
+            // 計算された新しい値
+            int newValue = (int)Math.Round(tb.Minimum + (tb.Maximum - tb.Minimum) * clickPercent);
+
+            // TrackBar の値を更新
+            tb.Value = newValue;
+
+
+            //トラックバーの値で動画の再生時間を更新
+            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = movie_trackbar.Value / 1000.0;
         }
 
 
@@ -194,5 +222,10 @@ namespace プロコン部チーム_0622_TEST
                 cut_end_time_display_label.Text = $"カット終了時間: {Properties.Settings.Default.cut_end_time}";
             }
         }
+
+
     }
 }
+
+
+//カット処理を行った動画の出力するファイル名を指定できるようにする
