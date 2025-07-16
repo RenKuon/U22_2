@@ -37,7 +37,7 @@ namespace プロコン部チーム_0622_TEST
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             //カットする範囲の開始時間と終了時間を.settingsファイルから取得
             TimeSpan start_time = Properties.Settings.Default.cut_start_time;                           //カットする範囲の開始地点の指定変数
@@ -77,7 +77,8 @@ namespace プロコン部チーム_0622_TEST
 
 
             //カット処理
-
+            this.label2.Text = "実行中"; //実行中テキストを更新
+            this.label2.ForeColor = Color.Red; //実行中のテキスト色を赤に変更
             this.label2.Visible = true; //実行中テキストを表示する
 
             //カット処理の実行
@@ -107,8 +108,13 @@ namespace プロコン部チーム_0622_TEST
 
                 File.Move(output_filepath, input_filename);//カット後のファイルを元のファイル名に変更
             }
-
+            //Form3終了処理
+            this.label2.Text = "実行完了"; //実行中テキストを更新
+            this.label2.ForeColor = Color.Green; //実行完了のテキスト色を緑に変更
+            await Task.Delay(2000); //2秒待機
             this.label2.Visible = false; //実行中テキストを非表示にする
+            this.Close();
+
 
 
 
