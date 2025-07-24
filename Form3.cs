@@ -43,81 +43,87 @@ namespace プロコン部チーム_0622_TEST
             TimeSpan start_time = Properties.Settings.Default.cut_start_time;                           //カットする範囲の開始地点の指定変数
             TimeSpan end_time = Properties.Settings.Default.cut_end_time;                               //カットする範囲の終了地点の指定変数
 
-
-            if (start_time >= end_time)
+            if (axWindowsMediaPlayer1.openState != WMPLib.WMPOpenState.wmposMediaOpen)
+            {
+                MessageBox.Show("動画が読み込まれていません。", "エラー");
+            }
+            else if (start_time >= end_time)
             {
                 MessageBox.Show("カット開始時間はカット終了時間より前に設定してください。", "エラー");
                 return; //カット開始時間がカット終了時間より後の場合は処理を中止
             }
-
-
-
-            string input_filepath = Properties.Settings.Default.raw_movie_filepath;     //インスタントリプレイの保存ファイルパスを.settingsファイルから読み込み
-            string input_filename = Path.GetFileName(input_filepath);       //元のファイル名を取得
-
-
-            //出力ファイルパスの設定
-            string output_filename = output_filename_textbox.Text + ".mp4";      //出力するファイル名をテキストボックスから取得
-
-
-            string output_filepath = Path.Combine(Properties.Settings.Default.folderpath, output_filename); //カット後のファイルの保存先パス
-
-
-            int i = 1; //連番の初期値
-            while (File.Exists(output_filepath)) //同名のファイルが存在する場合にファイル名に連番をつける
+            else
             {
-                output_filepath = Path.Combine(Properties.Settings.Default.folderpath, $"{output_filename_textbox.Text}{(i)}.mp4");
-                i++;
+
+
+
+                string input_filepath = Properties.Settings.Default.raw_movie_filepath;     //インスタントリプレイの保存ファイルパスを.settingsファイルから読み込み
+                string input_filename = Path.GetFileName(input_filepath);       //元のファイル名を取得
+
+
+                //出力ファイルパスの設定
+                string output_filename = output_filename_textbox.Text + ".mp4";      //出力するファイル名をテキストボックスから取得
+
+
+                string output_filepath = Path.Combine(Properties.Settings.Default.folderpath, output_filename); //カット後のファイルの保存先パス
+
+
+                int i = 1; //連番の初期値
+                while (File.Exists(output_filepath)) //同名のファイルが存在する場合にファイル名に連番をつける
+                {
+                    output_filepath = Path.Combine(Properties.Settings.Default.folderpath, $"{output_filename_textbox.Text}({(i)}).mp4");
+                    i++;
+                }
+
+
+                axWindowsMediaPlayer1.Ctlcontrols.pause();
+
+
+
+
+                //カット処理
+                this.label2.Text = "実行中"; //実行中テキストを更新
+                this.label2.ForeColor = Color.Red; //実行中のテキスト色を赤に変更
+                this.label2.Visible = true; //実行中テキストを表示する
+
+                //カット処理の実行
+                string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c:v libx264 -preset medium -crf 23 -c:a aac -b:a 128k \"{output_filepath}\"";
+                //string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c copy \"{output_filepath}\"";
+
+
+                //バックグラウンドでの処理
+                ProcessStartInfo processInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = $"/c {ffmpegCommand}",
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (Process process = Process.Start(processInfo))
+                {
+                    process.WaitForExit();
+                }
+
+
+
+                if (output_filepath == input_filepath)
+                {
+                    File.Delete(input_filepath); //元のファイルを削除
+
+                    File.Move(output_filepath, input_filename);//カット後のファイルを元のファイル名に変更
+                }
+                //Form3終了処理
+                this.label2.Text = "実行完了"; //実行中テキストを更新
+                this.label2.ForeColor = Color.Green; //実行完了のテキスト色を緑に変更
+                await Task.Delay(2000); //2秒待機
+                this.label2.Visible = false; //実行中テキストを非表示にする
+                this.Close();
+
+
+
+
             }
-
-
-            axWindowsMediaPlayer1.Ctlcontrols.pause();
-
-
-
-
-            //カット処理
-            this.label2.Text = "実行中"; //実行中テキストを更新
-            this.label2.ForeColor = Color.Red; //実行中のテキスト色を赤に変更
-            this.label2.Visible = true; //実行中テキストを表示する
-
-            //カット処理の実行
-            string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c:v libx264 -preset medium -crf 23 -c:a aac -b:a 128k \"{output_filepath}\"";
-            //string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c copy \"{output_filepath}\"";
-
-
-            //バックグラウンドでの処理
-            ProcessStartInfo processInfo = new ProcessStartInfo
-            {
-                FileName = "cmd.exe",
-                Arguments = $"/c {ffmpegCommand}",
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-
-            using (Process process = Process.Start(processInfo))
-            {
-                process.WaitForExit();
-            }
-
-
-
-            if (output_filepath == input_filepath)
-            {
-                File.Delete(input_filepath); //元のファイルを削除
-
-                File.Move(output_filepath, input_filename);//カット後のファイルを元のファイル名に変更
-            }
-            //Form3終了処理
-            this.label2.Text = "実行完了"; //実行中テキストを更新
-            this.label2.ForeColor = Color.Green; //実行完了のテキスト色を緑に変更
-            await Task.Delay(2000); //2秒待機
-            this.label2.Visible = false; //実行中テキストを非表示にする
-            this.Close();
-
-
-
-
         }
 
 
