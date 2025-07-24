@@ -60,6 +60,7 @@ namespace プロコン部チーム_0622_TEST
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             Recordtime = 60;    //1分
+            Properties.Settings.Default.recordtime = 60; // 設定に録画時間を保存
             MessageBox.Show("録画時間を1分に設定しました。");
         }
 

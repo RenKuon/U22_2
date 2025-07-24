@@ -70,5 +70,17 @@ namespace プロコン部チーム_0622_TEST.Properties {
                 this["cut_end_time"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int recordtime {
+            get {
+                return ((int)(this["recordtime"]));
+            }
+            set {
+                this["recordtime"] = value;
+            }
+        }
     }
 }
