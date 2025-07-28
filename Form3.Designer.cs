@@ -102,6 +102,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1078, 644);
             this.tableLayoutPanel1.TabIndex = 2;
+            this.tableLayoutPanel1.TabStop = true;
+            this.tableLayoutPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tablelayout_click);
             // 
             // button2
             // 
@@ -190,6 +192,7 @@
             this.movie_trackbar.TabIndex = 7;
             this.movie_trackbar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.movie_trackbar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.movie_trackbar_MouseDown);
+            this.movie_trackbar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.movie_trackbar_Move);
             this.movie_trackbar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.movie_trackbar_MouseUp);
             // 
             // axWindowsMediaPlayer1
@@ -252,6 +255,9 @@
             this.output_filename_textbox.Name = "output_filename_textbox";
             this.output_filename_textbox.Size = new System.Drawing.Size(194, 25);
             this.output_filename_textbox.TabIndex = 10;
+            this.output_filename_textbox.Enter += new System.EventHandler(this.output_textbox_enter);
+            this.output_filename_textbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form3_KeyDown);
+            this.output_filename_textbox.Leave += new System.EventHandler(this.output_textbox_focus_leave);
             // 
             // label1
             // 

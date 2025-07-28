@@ -17,6 +17,11 @@ namespace プロコン部チーム_0622_TEST
         //トラックバー操作中の排他制御用変数
         private bool trackbar_mouseup = false;
 
+        private bool output_focus = false; // 出力ファイル名のテキストボックスにフォーカスがあるかどうかのフラグ
+
+        // ドラッグ開始時のメディアプレーヤーの状態を保存するための変数
+        private WMPLib.WMPPlayState play_state;
+
         public Form3()
         {
             InitializeComponent(); //フォームの初期化
@@ -225,53 +230,114 @@ namespace プロコン部チーム_0622_TEST
         //トラックバーのクリックを外したときの処理
         private void movie_trackbar_MouseUp(object sender, MouseEventArgs e)
         {
-            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = movie_trackbar.Value / 1000.0;
-            trackbar_mouseup = false;
+            // マウスの左ボタンが離された場合のみ処理を終了
+            if (e.Button == MouseButtons.Left)
+            {
+                trackbar_mouseup = false;
+                // TrackBar の現在のインスタンスを取得
+                TrackBar tb = (TrackBar)sender;
+                // 最終的な位置で一度シークを確定させる
+                axWindowsMediaPlayer1.Ctlcontrols.currentPosition = tb.Value / 1000.0;
+                // ドラッグ開始時の再生状態に戻す
+                if (play_state == WMPLib.WMPPlayState.wmppsPlaying)
+                {
+                    axWindowsMediaPlayer1.Ctlcontrols.play(); // 元々再生中だった場合は再生を再開
+                }
+
+            }
         }
 
 
         //トラックバーのクリック時の処理
         private void movie_trackbar_MouseDown(object sender, MouseEventArgs e)
         {
-            trackbar_mouseup = true;
-
-            // TrackBar の現在のインスタンスを取得
-            TrackBar tb = (TrackBar)sender;
-
-            // クリックされたX座標とTrackBarの幅から、新しい値を計算する
-            // e.X はTrackBarコントロール内での相対X座標
-            // tb.Width はTrackBarコントロールの幅
-
-            // クリック位置をTrackBarの最小値から最大値の範囲にマッピング
-            // (double)e.X / tb.Width はクリック位置の割合 (0.0 ～ 1.0)
-            double clickPercent = (double)e.X / tb.Width;
-
-            // 計算された新しい値
-            int newValue = (int)Math.Round(tb.Minimum + (tb.Maximum - tb.Minimum) * clickPercent);
-
-            // TrackBar の値を更新
-            tb.Value = newValue;
+            if (e.Button == MouseButtons.Left)
+            {
 
 
-            //トラックバーの値で動画の再生時間を更新
-            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = movie_trackbar.Value / 1000.0;
+                trackbar_mouseup = true;
+
+
+                play_state = axWindowsMediaPlayer1.playState;  // 現在の再生状態を保存
+
+                // 動画を一時停止する
+                if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPlaying)
+                {
+                    axWindowsMediaPlayer1.Ctlcontrols.pause();
+                }
+
+                // TrackBar の現在のインスタンスを取得
+                TrackBar tb = (TrackBar)sender;
+
+                // クリックされたX座標とTrackBarの幅から、新しい値を計算する
+                // e.X はTrackBarコントロール内での相対X座標
+                // tb.Width はTrackBarコントロールの幅
+
+                // クリック位置をTrackBarの最小値から最大値の範囲にマッピング
+                // (double)e.X / tb.Width はクリック位置の割合 (0.0 ～ 1.0)
+                double clickPercent = (double)e.X / tb.Width;
+
+                // 計算された新しい値
+                int new_value = (int)Math.Round(tb.Minimum + (tb.Maximum - tb.Minimum) * clickPercent);
+
+                // TrackBar の値を更新
+                tb.Value = new_value;
+
+
+                //トラックバーの値で動画の再生時間を更新
+                axWindowsMediaPlayer1.Ctlcontrols.currentPosition = movie_trackbar.Value / 1000.0;
+            }
+        }
+
+        private void movie_trackbar_Move(object sender, MouseEventArgs e)
+        {
+            // ドラッグ中であり、かつ左ボタンが押されている場合のみ処理
+            if (trackbar_mouseup && e.Button == MouseButtons.Left)
+            {
+                TrackBar tb = (TrackBar)sender;
+
+                // マウスカーソルがTrackBarの範囲内にあるかを確認
+                // e.X がTrackBarの範囲外に出ると、tb.Value = newValue; でエラーになる可能性があるため
+                if (e.X >= 0 && e.X <= tb.Width)
+                {
+                    // クリック位置をTrackBarの最小値から最大値の範囲にマッピング
+                    double clickPercent = (double)e.X / tb.Width;
+                    int newValue = (int)Math.Round(tb.Minimum + (tb.Maximum - tb.Minimum) * clickPercent);
+
+                    // TrackBar の値を更新 (MouseMove イベントで値を更新)
+                    // この更新がTrackBarのサム（つまみ）をドラッグ中も動かす
+                    tb.Value = newValue;
+
+                    // トラックバーの値で動画の再生時間を更新
+                    // この行がドラッグ中に繰り返し実行されることで、動画がシークされる
+                    axWindowsMediaPlayer1.Ctlcontrols.currentPosition = tb.Value / 1000.0;
+                }
+            }
         }
 
 
         // キー操作の処理
         private void Form3_KeyDown(object sender, KeyEventArgs e)
         {
-            // Spaceキーが押されたかを判定
-            if (e.KeyCode == Keys.C)
+            if (output_focus == false) // 出力ファイル名のテキストボックスにフォーカスがある場合は処理を中止
             {
-                Properties.Settings.Default.cut_start_time = TimeSpan.FromSeconds(axWindowsMediaPlayer1.Ctlcontrols.currentPosition);  // カット開始時間を現在の再生位置に設定
-                cut_start_time_display_label.Text = $"カット開始時間: {Properties.Settings.Default.cut_start_time.ToString(@"mm\:ss\.ff")}";  // カット開始時間の表示を更新
+                // Spaceキーが押されたかを判定
+                if (e.KeyCode == Keys.C)
+                {
+                    Properties.Settings.Default.cut_start_time = TimeSpan.FromSeconds(axWindowsMediaPlayer1.Ctlcontrols.currentPosition);  // カット開始時間を現在の再生位置に設定
+                    cut_start_time_display_label.Text = $"カット開始時間: {Properties.Settings.Default.cut_start_time.ToString(@"mm\:ss\.ff")}";  // カット開始時間の表示を更新
+                }
+
+                if (e.KeyCode == Keys.V)
+                {
+                    Properties.Settings.Default.cut_end_time = TimeSpan.FromSeconds(axWindowsMediaPlayer1.Ctlcontrols.currentPosition);  // カット終了時間を現在の再生位置に設定
+                    cut_end_time_display_label.Text = $"カット終了時間: {Properties.Settings.Default.cut_end_time.ToString(@"mm\:ss\.ff")}"; ;// カット終了時間の表示を更新
+                }
             }
 
-            if (e.KeyCode == Keys.V)
+            if (e.KeyCode == Keys.Enter)
             {
-                Properties.Settings.Default.cut_end_time = TimeSpan.FromSeconds(axWindowsMediaPlayer1.Ctlcontrols.currentPosition);  // カット終了時間を現在の再生位置に設定
-                cut_end_time_display_label.Text = $"カット終了時間: {Properties.Settings.Default.cut_end_time.ToString(@"mm\:ss\.ff")}"; ;// カット終了時間の表示を更新
+                this.axWindowsMediaPlayer1.Focus();  // フォーカスをフォームに戻す
             }
         }
 
@@ -279,6 +345,21 @@ namespace プロコン部チーム_0622_TEST
         {
             Form2 form2 = new Form2();
             form2.ShowDialog();
+        }
+
+        private void tablelayout_click(object sender, MouseEventArgs e)
+        {
+            this.axWindowsMediaPlayer1.Focus();
+        }
+
+        private void output_textbox_focus_leave(object sender, EventArgs e)
+        {
+            output_focus = false; // 出力ファイル名のテキストボックスからフォーカスが外れたことを記録
+        }
+
+        private void output_textbox_enter(object sender, EventArgs e)
+        {
+            output_focus = true; // 出力ファイル名のテキストボックスにフォーカスが入ったことを記録
         }
     }
 }
