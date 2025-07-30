@@ -153,7 +153,7 @@ namespace プロコン部チーム_0622_TEST
         //ファイル参照
         private void input_file_button_Click(object sender, EventArgs e)
         {
-            string set_filepath = @"C:\";
+            string set_filepath = Properties.Settings.Default.folderpath;
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Title = "ファイル選択";
@@ -334,11 +334,6 @@ namespace プロコン部チーム_0622_TEST
                     cut_end_time_display_label.Text = $"カット終了時間: {Properties.Settings.Default.cut_end_time.ToString(@"mm\:ss\.ff")}"; ;// カット終了時間の表示を更新
                 }
             }
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.axWindowsMediaPlayer1.Focus();  // フォーカスをフォームに戻す
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -360,6 +355,16 @@ namespace プロコン部チーム_0622_TEST
         private void output_textbox_enter(object sender, EventArgs e)
         {
             output_focus = true; // 出力ファイル名のテキストボックスにフォーカスが入ったことを記録
+        }
+
+        private void output_filename_textbox_keydown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                output_focus = false; // Enterキーが押されたらフォーカスを外す
+                this.axWindowsMediaPlayer1.Focus(); // フォーカスをフォームに戻す
+                e.SuppressKeyPress = true;
+            }
         }
     }
 }
