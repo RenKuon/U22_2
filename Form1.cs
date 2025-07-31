@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static プロコン部チーム_0622_TEST.Form2;
@@ -29,79 +30,103 @@ namespace プロコン部チーム_0622_TEST
 
         public class FFmpegRecorder
         {
-            private Process ffmpegProcess;
-            // private FFmpegRecorder recorder;
+            private List<string> segmentFiles = new List<string>();
+            private string segmentFolder;
+            private CancellationTokenSource cts;
+            private int segmentDuration = 5; // 5秒ごとのセグメント
             StringBuilder outputBuilder = new StringBuilder();
             StringBuilder errorBuilder = new StringBuilder();
 
-
             public void StartRecording(string outputFilePath)
             {
-                string ffmpegPath = "ffmpeg.exe"; // 実行可能ファイルのパス（相対または絶対）
-                string arguments = $"-y -f gdigrab -framerate 60 -i desktop -c:v libx264 -pix_fmt yuv420p -preset ultrafast \"{outputFilePath}\"";
+                segmentFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "segments");
+                Directory.CreateDirectory(segmentFolder);
+                segmentFiles.Clear();
+                cts = new CancellationTokenSource();
 
-                ffmpegProcess = new Process();
-                ffmpegProcess.StartInfo.FileName = ffmpegPath;
-                ffmpegProcess.StartInfo.Arguments = arguments;
-                ffmpegProcess.StartInfo.CreateNoWindow = true;
-                ffmpegProcess.StartInfo.UseShellExecute = false;
-                ffmpegProcess.StartInfo.RedirectStandardInput = true;
-                ffmpegProcess.StartInfo.RedirectStandardError = true;
-                ffmpegProcess.StartInfo.RedirectStandardOutput = true;
+                int maxSegments = (int)Math.Ceiling((double)Form2.Recordtime / segmentDuration);
+                string dateStamp = DateTime.Now.ToString("yyyy_MM_dd");
+                int i = 0;
 
-                //ここから下が新規
-                ffmpegProcess.OutputDataReceived += (sender, e) =>
+                Task.Run(() =>
                 {
-                    if (!string.IsNullOrEmpty(e.Data))
+                    while (!cts.IsCancellationRequested)
                     {
-                        outputBuilder.AppendLine($"FFmpeg StdOut:{e.Data}");
-                    }
-                };
+                        int segmentIndex = i % maxSegments;
+                        string segmentFile = Path.Combine(segmentFolder, $"{dateStamp}_{segmentIndex}.mp4");
 
-                ffmpegProcess.ErrorDataReceived += (sender, e) =>
-                {
-                    if (!string.IsNullOrEmpty(e.Data))
-                    {
-                        errorBuilder.AppendLine($"FFmpeg StdErr:{e.Data}");
-                    }
-                };
-                //ここから上が新規
+                        // 保存リストに追加（上書きでもリスト保持）
+                        if (!segmentFiles.Contains(segmentFile))
+                        {
+                            segmentFiles.Add(segmentFile);
+                        }
 
-                try
-                {
-                    ffmpegProcess.Start();
-                    ffmpegProcess.BeginOutputReadLine();
-                    ffmpegProcess.BeginErrorReadLine();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("FFmpeg の起動に失敗しました: " + ex.Message);
-                }
+                        using (var ffmpeg = new Process())
+                        {
+                            ffmpeg.StartInfo.FileName = "ffmpeg.exe";
+                            ffmpeg.StartInfo.Arguments =
+                                $"-y -f gdigrab -framerate 60 -i desktop -t {segmentDuration} -c:v libx264 -pix_fmt yuv420p -preset ultrafast \"{segmentFile}\"";
+                            ffmpeg.StartInfo.CreateNoWindow = true;
+                            ffmpeg.StartInfo.UseShellExecute = false;
+                            ffmpeg.Start();
+                            ffmpeg.WaitForExit();
+                        }
+
+                        if (!File.Exists(segmentFile))
+                        {
+                            MessageBox.Show($"録画に失敗しました: {segmentFile}");
+                        }
+
+                        i++;
+                    }
+                });
             }
+
 
             public void StopRecording()
             {
-                if (ffmpegProcess != null && !ffmpegProcess.HasExited)
+                cts?.Cancel();
+
+                string logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
+                Directory.CreateDirectory(logFolder);
+                string logFilePath = Path.Combine(logFolder, $"ffmpeg_log_{DateTime.Now:yyyyMMdd_HHmmss}.txt");
+                File.WriteAllText(logFilePath, outputBuilder.ToString() + Environment.NewLine + errorBuilder.ToString());
+
+                string concatListPath = Path.Combine(segmentFolder, "concat.txt");
+                using (StreamWriter writer = new StreamWriter(concatListPath, false, Encoding.UTF8))
                 {
-                    ffmpegProcess.StandardInput.WriteLine("q");
-                    ffmpegProcess.WaitForExit();                 // プロセスが完全に終了するまで待つ
-                                                                 // 必要ならここで UI 更新や「録画完了」メッセージなど
-                                                                 //ここから下が新規
-                                                                 // 例: StopRecordingの最後などに追記
-                    string logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
-                    Directory.CreateDirectory(logFolder); // フォルダがなければ作る
-
-                    string logFilePath = Path.Combine(logFolder, $"ffmpeg_log_{DateTime.Now:yyyyMMdd_HHmmss}.txt");
-
-                    File.WriteAllText(logFilePath, outputBuilder.ToString() + Environment.NewLine + errorBuilder.ToString());
-                    //ここから上が新規
-                    //C:\VisualStudio\プロコン部チーム_0622_TEST\bin\Debug\logsにログファイル出力
-
-                    MessageBox.Show("録画ファイルの保存が完了しました。");
+                    foreach (var file in segmentFiles)
+                    {
+                        writer.WriteLine($"file '{file.Replace("\\", "/")}'");
+                    }
                 }
-            }
 
+                string baseName = $"combined_{DateTime.Now:yyyy_MM_dd}";
+                string outputFolder = Path.GetDirectoryName(Properties.Settings.Default.raw_movie_filepath);
+                string finalName = baseName + ".mp4";
+                int suffix = 1;
+                while (File.Exists(Path.Combine(outputFolder, finalName)))
+                {
+                    finalName = $"{baseName}_{suffix}.mp4";
+                    suffix++;
+                }
+
+                string finalPath = Path.Combine(outputFolder, finalName);
+
+                using (var ffmpeg = new Process())
+                {
+                    ffmpeg.StartInfo.FileName = "ffmpeg.exe";
+                    ffmpeg.StartInfo.Arguments = $"-y -f concat -safe 0 -i \"{concatListPath}\" -c copy \"{finalPath}\"";
+                    ffmpeg.StartInfo.CreateNoWindow = true;
+                    ffmpeg.StartInfo.UseShellExecute = false;
+                    ffmpeg.Start();
+                    ffmpeg.WaitForExit();
+                }
+
+                MessageBox.Show("録画ファイルの保存が完了しました。");
+            }
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
