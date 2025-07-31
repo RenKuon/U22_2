@@ -65,8 +65,9 @@
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label2.ForeColor = System.Drawing.Color.Red;
             this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(826, 200);
+            this.label2.Size = new System.Drawing.Size(662, 167);
             this.label2.TabIndex = 13;
             this.label2.Text = "実行中です";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -77,7 +78,8 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(3, 219);
+            this.label1.Location = new System.Drawing.Point(2, 179);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 20);
             this.label1.TabIndex = 11;
@@ -87,10 +89,11 @@
             // output_filename_textbox
             // 
             this.output_filename_textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.output_filename_textbox.Location = new System.Drawing.Point(3, 242);
+            this.output_filename_textbox.Location = new System.Drawing.Point(2, 201);
+            this.output_filename_textbox.Margin = new System.Windows.Forms.Padding(2);
             this.output_filename_textbox.MaxLength = 100;
             this.output_filename_textbox.Name = "output_filename_textbox";
-            this.output_filename_textbox.Size = new System.Drawing.Size(244, 25);
+            this.output_filename_textbox.Size = new System.Drawing.Size(196, 22);
             this.output_filename_textbox.TabIndex = 10;
             this.output_filename_textbox.Enter += new System.EventHandler(this.output_textbox_enter);
             this.output_filename_textbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.output_filename_textbox_keydown);
@@ -101,23 +104,25 @@
             this.cut_start_time_display_label.AutoSize = true;
             this.cut_start_time_display_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cut_start_time_display_label.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cut_start_time_display_label.Location = new System.Drawing.Point(3, 359);
+            this.cut_start_time_display_label.Location = new System.Drawing.Point(2, 299);
+            this.cut_start_time_display_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.cut_start_time_display_label.Name = "cut_start_time_display_label";
-            this.cut_start_time_display_label.Size = new System.Drawing.Size(244, 60);
+            this.cut_start_time_display_label.Size = new System.Drawing.Size(196, 50);
             this.cut_start_time_display_label.TabIndex = 9;
             this.cut_start_time_display_label.Text = "カット開始時間: 00:00.00";
             this.cut_start_time_display_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cut_end_time_display_label
             // 
-            this.cut_end_time_display_label.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.cut_end_time_display_label.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cut_end_time_display_label.AutoSize = true;
             this.cut_end_time_display_label.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cut_end_time_display_label.Location = new System.Drawing.Point(3, 479);
+            this.cut_end_time_display_label.Location = new System.Drawing.Point(2, 399);
+            this.cut_end_time_display_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.cut_end_time_display_label.Name = "cut_end_time_display_label";
-            this.cut_end_time_display_label.Size = new System.Drawing.Size(244, 60);
+            this.cut_end_time_display_label.Size = new System.Drawing.Size(196, 50);
             this.cut_end_time_display_label.TabIndex = 8;
             this.cut_end_time_display_label.Text = "カット終了時間00:00.00";
             this.cut_end_time_display_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -127,23 +132,25 @@
             this.time_display_label.AutoSize = true;
             this.time_display_label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.time_display_label.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.time_display_label.Location = new System.Drawing.Point(253, 539);
+            this.time_display_label.Location = new System.Drawing.Point(202, 449);
+            this.time_display_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.time_display_label.Name = "time_display_label";
-            this.time_display_label.Size = new System.Drawing.Size(277, 60);
+            this.time_display_label.Size = new System.Drawing.Size(223, 50);
             this.time_display_label.TabIndex = 6;
             this.time_display_label.Text = "00:00.00 / 00:00.00";
             this.time_display_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // movie_trackbar
             // 
-            this.movie_trackbar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.movie_trackbar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.movie_trackbar, 6);
-            this.movie_trackbar.Location = new System.Drawing.Point(3, 602);
+            this.movie_trackbar.Location = new System.Drawing.Point(2, 501);
+            this.movie_trackbar.Margin = new System.Windows.Forms.Padding(2);
             this.movie_trackbar.Maximum = 1000;
             this.movie_trackbar.Name = "movie_trackbar";
-            this.movie_trackbar.Size = new System.Drawing.Size(1076, 48);
+            this.movie_trackbar.Size = new System.Drawing.Size(862, 41);
             this.movie_trackbar.TabIndex = 7;
             this.movie_trackbar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.movie_trackbar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.movie_trackbar_MouseDown);
@@ -154,9 +161,10 @@
             // 
             this.pausebutton.AutoSize = true;
             this.pausebutton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pausebutton.Location = new System.Drawing.Point(672, 542);
+            this.pausebutton.Location = new System.Drawing.Point(538, 451);
+            this.pausebutton.Margin = new System.Windows.Forms.Padding(2);
             this.pausebutton.Name = "pausebutton";
-            this.pausebutton.Size = new System.Drawing.Size(130, 54);
+            this.pausebutton.Size = new System.Drawing.Size(105, 46);
             this.pausebutton.TabIndex = 4;
             this.pausebutton.Text = "‖ 一時停止";
             this.pausebutton.UseVisualStyleBackColor = true;
@@ -166,9 +174,10 @@
             // 
             this.input_file_button.AutoSize = true;
             this.input_file_button.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.input_file_button.Location = new System.Drawing.Point(808, 542);
+            this.input_file_button.Location = new System.Drawing.Point(647, 451);
+            this.input_file_button.Margin = new System.Windows.Forms.Padding(2);
             this.input_file_button.Name = "input_file_button";
-            this.input_file_button.Size = new System.Drawing.Size(130, 54);
+            this.input_file_button.Size = new System.Drawing.Size(105, 46);
             this.input_file_button.TabIndex = 5;
             this.input_file_button.Text = "参照";
             this.input_file_button.UseVisualStyleBackColor = true;
@@ -179,9 +188,10 @@
             this.playbutton.AutoSize = true;
             this.playbutton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.playbutton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playbutton.Location = new System.Drawing.Point(536, 542);
+            this.playbutton.Location = new System.Drawing.Point(429, 451);
+            this.playbutton.Margin = new System.Windows.Forms.Padding(2);
             this.playbutton.Name = "playbutton";
-            this.playbutton.Size = new System.Drawing.Size(130, 54);
+            this.playbutton.Size = new System.Drawing.Size(105, 46);
             this.playbutton.TabIndex = 2;
             this.playbutton.Text = "▶ 再生";
             this.playbutton.UseVisualStyleBackColor = false;
@@ -193,7 +203,8 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label3.ForeColor = System.Drawing.Color.LimeGreen;
-            this.label3.Location = new System.Drawing.Point(58, 335);
+            this.label3.Location = new System.Drawing.Point(33, 275);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 24);
             this.label3.TabIndex = 12;
@@ -206,7 +217,8 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label4.ForeColor = System.Drawing.Color.LimeGreen;
-            this.label4.Location = new System.Drawing.Point(58, 455);
+            this.label4.Location = new System.Drawing.Point(33, 375);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(133, 24);
             this.label4.TabIndex = 13;
@@ -216,9 +228,10 @@
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(3, 542);
+            this.button2.Location = new System.Drawing.Point(2, 451);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(244, 54);
+            this.button2.Size = new System.Drawing.Size(196, 46);
             this.button2.TabIndex = 14;
             this.button2.Text = "設定";
             this.button2.UseVisualStyleBackColor = true;
@@ -249,18 +262,19 @@
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 9;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 76.92307F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.07693F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1082, 653);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(866, 544);
             this.tableLayoutPanel1.TabIndex = 2;
             this.tableLayoutPanel1.TabStop = true;
             this.tableLayoutPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tablelayout_click);
@@ -268,9 +282,10 @@
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(944, 542);
+            this.button1.Location = new System.Drawing.Point(756, 451);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(135, 54);
+            this.button1.Size = new System.Drawing.Size(108, 46);
             this.button1.TabIndex = 0;
             this.button1.Text = "カット実行";
             this.button1.UseVisualStyleBackColor = true;
@@ -278,16 +293,17 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.panel1, 5);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.axWindowsMediaPlayer1);
-            this.panel1.Location = new System.Drawing.Point(253, 3);
+            this.panel1.Location = new System.Drawing.Point(202, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.tableLayoutPanel1.SetRowSpan(this.panel1, 7);
-            this.panel1.Size = new System.Drawing.Size(826, 533);
+            this.panel1.Size = new System.Drawing.Size(662, 445);
             this.panel1.TabIndex = 15;
             // 
             // axWindowsMediaPlayer1
@@ -295,20 +311,22 @@
             this.axWindowsMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.axWindowsMediaPlayer1.Enabled = true;
             this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(0, 0);
+            this.axWindowsMediaPlayer1.Margin = new System.Windows.Forms.Padding(2);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(826, 533);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(662, 445);
             this.axWindowsMediaPlayer1.TabIndex = 3;
             this.axWindowsMediaPlayer1.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.axWindowsMediaPlayer1_OpenStateChange);
             // 
             // Form3
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1082, 653);
+            this.ClientSize = new System.Drawing.Size(866, 544);
             this.Controls.Add(this.tableLayoutPanel1);
             this.KeyPreview = true;
-            this.MinimumSize = new System.Drawing.Size(1100, 700);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(884, 591);
             this.Name = "Form3";
             this.Text = "編集";
             this.Load += new System.EventHandler(this.Form3_Load);

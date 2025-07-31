@@ -60,10 +60,27 @@ namespace プロコン部チーム_0622_TEST
             }
 
 
+            //textboxの入力値チェック
+            if (string.IsNullOrWhiteSpace(output_filename_textbox.Text)) //出力ファイル名のテキストボックスが空の場合
+            {
+                MessageBox.Show("出力ファイル名を入力してください。", "エラー");
+                return; //出力ファイル名が空の場合は処理を中止
+            }
+            if (output_filename_textbox.Text.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0) //出力ファイル名に無効な文字が含まれている場合
+            {
+                MessageBox.Show("出力ファイル名に無効な文字が含まれています。", "エラー");
+                return; //無効な文字が含まれている場合は処理を中止
+            }
+            if (output_filename_textbox.Text != output_filename_textbox.Text.Trim())
+            {
+                MessageBox.Show("出力ファイル名の先頭または末尾に空白が含まれています。", "エラー");
+                return; // 先頭または末尾に空白がある場合は処理を中止
+            }
 
 
             string input_filepath = Properties.Settings.Default.raw_movie_filepath;     //インスタントリプレイの保存ファイルパスを.settingsファイルから読み込み
             string input_filename = Path.GetFileName(input_filepath);       //元のファイル名を取得
+
 
 
             //出力ファイルパスの設定
@@ -80,6 +97,11 @@ namespace プロコン部チーム_0622_TEST
                 i++;
             }
 
+            if (output_filepath.Length == 260)
+            {
+                MessageBox.Show("出力ファイル名が長すぎます。260文字以下にしてください。", "エラー");
+                return; //出力ファイル名が長すぎる場合は処理を中止
+            }
 
             axWindowsMediaPlayer1.Ctlcontrols.pause();
 
@@ -93,8 +115,6 @@ namespace プロコン部チーム_0622_TEST
 
             //カット処理の実行]
 
-            //エンコードバージョン
-            //string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c:v libx264 -preset medium -crf 23 -c:a aac -b:a 128k \"{output_filepath}\"";
 
             //コピーバージョン
             string ffmpegCommand = $"ffmpeg -i -ss {start_time} \"{input_filepath}\" -to {end_time} -c copy \"{output_filepath}\"";
