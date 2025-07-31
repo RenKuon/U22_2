@@ -21,11 +21,57 @@ namespace プロコン部チーム_0622_TEST
         public Form1()
         {
             InitializeComponent();
-            this.MaximizeBox = false; // 最大化ボタンを無効化
-            this.FormBorderStyle = FormBorderStyle.FixedSingle; // サイズ変更を禁止
-            //this.Icon = new System.Drawing.Icon("C:\\Users\\legac\\OneDrive\\画像\\Test_GUI.ico"); 
-            //↑アイコンを入れる場合（.icoへの正しい変換が必要）
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.AutoScaleMode = AutoScaleMode.Dpi;
+        }
+
+        // ✅ イベントハンドラはここ（Form1内）に定義すべき
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("録画を開始しました。");
+            button1.Enabled = false;
+            button2.Visible = true;
+            label1.Visible = true;
+            button3.Enabled = false;
+            button4.Enabled = false;
+
+            recorder = new FFmpegRecorder();
+
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string outputFile = $"recording_{timestamp}.mp4";
+            string outputFilePath = Path.Combine(Properties.Settings.Default.folderpath, outputFile);
+            Properties.Settings.Default.raw_movie_filepath = outputFilePath;
+
+            recorder.StartRecording(outputFilePath);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("録画を停止しました。");
+            button1.Enabled = true;
+            button2.Visible = false;
+            label1.Visible = false;
+            button3.Enabled = true;
+            button4.Enabled = true;
+
+            recorder.StopRecording();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form3 form3 = new Form3();
+            form3.Show();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
         }
 
         public class FFmpegRecorder
@@ -33,7 +79,7 @@ namespace プロコン部チーム_0622_TEST
             private List<string> segmentFiles = new List<string>();
             private string segmentFolder;
             private CancellationTokenSource cts;
-            private int segmentDuration = 5; // 5秒ごとのセグメント
+            private int segmentDuration = 5;
             StringBuilder outputBuilder = new StringBuilder();
             StringBuilder errorBuilder = new StringBuilder();
 
@@ -53,9 +99,8 @@ namespace プロコン部チーム_0622_TEST
                     while (!cts.IsCancellationRequested)
                     {
                         int segmentIndex = i % maxSegments;
-                        string segmentFile = Path.Combine(segmentFolder, $"{dateStamp}_{segmentIndex}.mp4");
+                        string segmentFile = Path.Combine(segmentFolder, $"{dateStamp}_{segmentIndex}.ts"); 
 
-                        // 保存リストに追加（上書きでもリスト保持）
                         if (!segmentFiles.Contains(segmentFile))
                         {
                             segmentFiles.Add(segmentFile);
@@ -65,7 +110,7 @@ namespace プロコン部チーム_0622_TEST
                         {
                             ffmpeg.StartInfo.FileName = "ffmpeg.exe";
                             ffmpeg.StartInfo.Arguments =
-                                $"-y -f gdigrab -framerate 60 -i desktop -t {segmentDuration} -c:v libx264 -pix_fmt yuv420p -preset ultrafast \"{segmentFile}\"";
+    $"-y -f gdigrab -framerate 60 -i desktop -t {segmentDuration} -c:v libx264 -pix_fmt yuv420p -preset ultrafast -f mpegts \"{segmentFile}\"";
                             ffmpeg.StartInfo.CreateNoWindow = true;
                             ffmpeg.StartInfo.UseShellExecute = false;
                             ffmpeg.Start();
@@ -82,7 +127,6 @@ namespace プロコン部チーム_0622_TEST
                 });
             }
 
-
             public void StopRecording()
             {
                 cts?.Cancel();
@@ -92,14 +136,21 @@ namespace プロコン部チーム_0622_TEST
                 string logFilePath = Path.Combine(logFolder, $"ffmpeg_log_{DateTime.Now:yyyyMMdd_HHmmss}.txt");
                 File.WriteAllText(logFilePath, outputBuilder.ToString() + Environment.NewLine + errorBuilder.ToString());
 
+                if (segmentFiles.Count == 0)
+                {
+                    MessageBox.Show("連結対象のセグメントファイルがありません。");
+                    return;
+                }
+
                 string concatListPath = Path.Combine(segmentFolder, "concat.txt");
-                using (StreamWriter writer = new StreamWriter(concatListPath, false, Encoding.UTF8))
+                using (StreamWriter writer = new StreamWriter(concatListPath, false, new UTF8Encoding(false))) // ← BOMなし
                 {
                     foreach (var file in segmentFiles)
                     {
                         writer.WriteLine($"file '{file.Replace("\\", "/")}'");
                     }
                 }
+
 
                 string baseName = $"combined_{DateTime.Now:yyyy_MM_dd}";
                 string outputFolder = Path.GetDirectoryName(Properties.Settings.Default.raw_movie_filepath);
@@ -116,96 +167,55 @@ namespace プロコン部チーム_0622_TEST
                 using (var ffmpeg = new Process())
                 {
                     ffmpeg.StartInfo.FileName = "ffmpeg.exe";
-                    ffmpeg.StartInfo.Arguments = $"-y -f concat -safe 0 -i \"{concatListPath}\" -c copy \"{finalPath}\"";
+                    ffmpeg.StartInfo.Arguments = $"-y -f concat -safe 0 -i \"{concatListPath}\" -c copy -f mp4 \"{finalPath}\"";
                     ffmpeg.StartInfo.CreateNoWindow = true;
                     ffmpeg.StartInfo.UseShellExecute = false;
+                    ffmpeg.StartInfo.RedirectStandardOutput = false;
+                    ffmpeg.StartInfo.RedirectStandardError = false;
+
                     ffmpeg.Start();
                     ffmpeg.WaitForExit();
+
+                    if (ffmpeg.ExitCode != 0 || !File.Exists(finalPath))
+                    {
+                        MessageBox.Show("連結に失敗しました。詳細はログをご確認ください。");
+                        File.AppendAllText(logFilePath, $"\n[ERROR] FFmpeg exited with code {ffmpeg.ExitCode}\n");
+                        return;
+                    }
                 }
 
                 MessageBox.Show("録画ファイルの保存が完了しました。");
-            }
-        }
 
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("録画を開始しました。");
-            button1.Enabled = false;    //開始ボタンを押せなくする
-            button2.Visible = true;       //停止ボタンを出現させる
-            label1.Visible = true;        //「録画中」を出現させる
-            button3.Enabled = false;    //設定を押せなくする
-            button4.Enabled = false;    //編集を押せなくする
-
-            recorder = new FFmpegRecorder();
-
-            //フォルダ作成機能
-
-            //string folderPath = Path.Combine(AppState.FolderPath, AppState.FolderName);
-            //Directory.CreateDirectory(folderPath); // 存在しない場合でも安全に作成されます
-
-            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-            string outputFile = $"recording_{timestamp}.mp4";// 出力ファイル名（必要に応じてパスも指定可）
-
-            string outputFilePath = Path.Combine(Properties.Settings.Default.folderpath, outputFile);//出力先パス、ファイル名をグローバルな変数から持ってくる
-            Properties.Settings.Default.raw_movie_filepath = outputFilePath; //設定ファイルに出力先パスを保存
-            recorder.StartRecording(outputFilePath);
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("録画を停止しました。");
-            button1.Enabled = true;     //開始ボタンを再び有効化
-            button2.Visible = false;    //停止ボタンを隠す
-            label1.Visible = false;       //「録画中」を隠す
-            button3.Enabled = true;     //設定を有効化
-            button4.Enabled = true;     //編集を有効化
-
-            recorder.StopRecording();
-
-
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Form2 form2 = new Form2();
-            form2.Show(); // モードレス表示（親フォームも操作可能）
-                          // form2.ShowDialog(); // モーダル表示（親フォームは操作不可）
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Form3 form3 = new Form3();
-            form3.Show(); // モードレス表示（親フォームも操作可能）
-        }
-        /*
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (ffmpegProcess != null && !ffmpegProcess.HasExited)
-            {
-                ffmpegProcess.StandardInput.WriteLine("q");
-                ffmpegProcess.WaitForExit(3000); // 最後の処理に余裕をもたせる
-                if (!ffmpegProcess.HasExited)
+                try
                 {
-                    ffmpegProcess.Kill();
+                    string[] files = Directory.GetFiles(segmentFolder);
+                    foreach (var file in files)
+                    {
+                        int retry = 0;
+                        while (retry < 3)
+                        {
+                            try
+                            {
+                                File.Delete(file);
+                                break;
+                            }
+                            catch (IOException)
+                            {
+                                Thread.Sleep(500); // 少し待って再試行
+                                retry++;
+                            }
+                        }
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"セグメントファイルの削除に失敗しました: {ex.Message}");
+                }
+
             }
         }
-        */
-
     }
-
 }
