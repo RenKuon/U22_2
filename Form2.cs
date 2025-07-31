@@ -12,7 +12,7 @@ namespace プロコン部チーム_0622_TEST
 {
     public partial class Form2 : Form
     {
-        int Recordtime; //録画したい時間
+        public static int Recordtime; //録画したい時間
 
         public Form2()
         {
