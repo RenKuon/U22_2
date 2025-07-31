@@ -4,6 +4,9 @@
 
 /bin/Debug/logs
 .vs/
+*.suo
+documentLayout.json
+documentLayout.backup.json
 
 # Created by https://www.toptal.com/developers/gitignore/api/csharp,visualstudio,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=csharp,visualstudio,windows
