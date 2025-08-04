@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Wave;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace プロコン部チーム_0622_TEST
 {
     public partial class Form2 : Form
     {
-        public static int Recordtime; //録画したい時間
 
         public Form2()
         {
@@ -27,16 +28,37 @@ namespace プロコン部チーム_0622_TEST
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            this.ActiveControl = null;
             textBox1.ReadOnly = true;
             textBox1.Text = Properties.Settings.Default.folderpath;     // 設定からフォルダパスを取得
+            set_output_device_comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
+
+
+            // コンボボックスをクリア
+            set_output_device_comboBox.Items.Clear();
+
+            // NAudioを使ってオーディオ出力デバイスの数を取得
+            int deviceCount = WaveOut.DeviceCount;
+
+            // 各デバイスの情報を取得し、コンボボックスに追加
+            for (int i = 0; i < deviceCount; i++)
+            {
+                var caps = WaveOut.GetCapabilities(i);
+                set_output_device_comboBox.Items.Add(caps.ProductName);
+
+                if (Properties.Settings.Default.set_output_device == caps.ProductName)
+                {
+                    set_output_device_comboBox.SelectedIndex = i; // 設定されているデバイスを選択
+                }
+                else
+                {
+                    set_output_device_comboBox.SelectedIndex = 0; // デフォルトで最初のデバイスを選択
+                }
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AppState.FolderName = textBox2.Text;
-            MessageBox.Show("出力フォルダの指名が完了しました。");
 
-        }
 
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -59,22 +81,41 @@ namespace プロコン部チーム_0622_TEST
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            Recordtime = 60;    //1分
-            Properties.Settings.Default.recordtime = 60; // 設定に録画時間を保存
-            MessageBox.Show("録画時間を1分に設定しました。");
+            set_record_time(1);    //1分
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            Recordtime = 120;   //2分
-            MessageBox.Show("録画時間を2分に設定しました。");
+            set_record_time(2);    //2分
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            Recordtime = 180;   //3分
-            MessageBox.Show("録画時間を3分に設定しました。");
+            set_record_time(3);    //3分
         }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            set_record_time(5);    //5分
+        }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            set_record_time(10);   //10分
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            set_record_time(20);   //20分
+        }
+
+        private void set_record_time(int minutes)
+        {
+            Properties.Settings.Default.recordtime = minutes * 60; // 分を秒に変換
+            MessageBox.Show($"録画時間を{minutes}分に設定しました。");
+        }
+
+
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -91,8 +132,11 @@ namespace プロコン部チーム_0622_TEST
             MessageBox.Show("出力ファイルのパス指定が完了しました。");
         }
 
-        private void label2_Click(object sender, EventArgs e)
+
+        private void set_output_device_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // 選択されたデバイスのインデックスを取得
+            Properties.Settings.Default.set_output_device = set_output_device_comboBox.SelectedItem.ToString();
 
         }
     }

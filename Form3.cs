@@ -117,7 +117,7 @@ namespace プロコン部チーム_0622_TEST
 
 
             //コピーバージョン
-            string ffmpegCommand = $"ffmpeg -i -ss {start_time} \"{input_filepath}\" -to {end_time} -c copy \"{output_filepath}\"";
+            string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c copy \"{output_filepath}\"";
 
 
             //バックグラウンドでの処理
