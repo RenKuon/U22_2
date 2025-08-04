@@ -85,8 +85,7 @@
               "ToolTip": "C:\\VisualStudio\\U22\\U22_2\\Properties\\Settings.settings",
               "RelativeToolTip": "Properties\\Settings.settings",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
-              "WhenOpened": "2025-07-24T05:20:38.197Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-24T05:20:38.197Z"
             },
             {
               "$type": "Document",
@@ -94,9 +93,9 @@
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\VisualStudio\\U22\\U22_2\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\VisualStudio\\U22\\U22_2\\Form1.cs",
-              "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAALgAAAAAAAAAAAAiwMgAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\VisualStudio\\U22\\U22_2\\Form1.cs*",
+              "RelativeToolTip": "Form1.cs*",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAAwHoAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-24T05:10:27.392Z",
               "EditorCaption": ""
@@ -111,8 +110,7 @@
               "RelativeToolTip": "Form1.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-24T05:10:50.379Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-24T05:10:50.379Z"
             },
             {
               "$type": "Document",

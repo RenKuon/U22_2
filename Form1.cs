@@ -108,9 +108,20 @@ namespace プロコン部チーム_0622_TEST
 
                         using (var ffmpeg = new Process())
                         {
+
+                            string set_output_device = "ステレオ ミキサー (Realtek(R) Audio)";
+
                             ffmpeg.StartInfo.FileName = "ffmpeg.exe";
                             ffmpeg.StartInfo.Arguments =
-    $"-y -f gdigrab -framerate 60 -i desktop -t {segmentDuration} -c:v libx264 -pix_fmt yuv420p -preset ultrafast -f mpegts \"{segmentFile}\"";
+                                $"-y " +
+                                $"-video_size 1920x1080 -framerate 60 " +
+                                $"-f gdigrab -i desktop " +
+                                $"-f dshow -i audio=\"{set_output_device}\" " +
+                                $"-t {segmentDuration} " +
+                                $"-map 0:v:0 -map 1:a:0 " +
+                                $"-vcodec libx264 -pix_fmt yuv420p -acodec aac -b:a 320k -ac 2 -ar 44100 " +
+                                $"-reset_timestamps 1 " +
+                                $"-f mpegts \"{segmentFile}\"";
                             ffmpeg.StartInfo.CreateNoWindow = true;
                             ffmpeg.StartInfo.UseShellExecute = false;
                             ffmpeg.Start();
@@ -141,6 +152,12 @@ namespace プロコン部チーム_0622_TEST
                     MessageBox.Show("連結対象のセグメントファイルがありません。");
                     return;
                 }
+
+
+                segmentFiles = segmentFiles
+                    .Where(File.Exists)
+                    .OrderBy(file => File.GetLastWriteTimeUtc(file))
+                    .ToList();
 
                 string concatListPath = Path.Combine(segmentFolder, "concat.txt");
                 using (StreamWriter writer = new StreamWriter(concatListPath, false, new UTF8Encoding(false))) // ← BOMなし
