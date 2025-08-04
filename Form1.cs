@@ -90,7 +90,7 @@ namespace プロコン部チーム_0622_TEST
                 segmentFiles.Clear();
                 cts = new CancellationTokenSource();
 
-                int maxSegments = (int)Math.Ceiling((double)Form2.Recordtime / segmentDuration);
+                int maxSegments = (int)Math.Ceiling((double)Properties.Settings.Default.recordtime / segmentDuration);
                 string dateStamp = DateTime.Now.ToString("yyyy_MM_dd");
                 int i = 0;
 
@@ -99,7 +99,7 @@ namespace プロコン部チーム_0622_TEST
                     while (!cts.IsCancellationRequested)
                     {
                         int segmentIndex = i % maxSegments;
-                        string segmentFile = Path.Combine(segmentFolder, $"{dateStamp}_{segmentIndex}.ts"); 
+                        string segmentFile = Path.Combine(segmentFolder, $"{dateStamp}_{segmentIndex}.ts");
 
                         if (!segmentFiles.Contains(segmentFile))
                         {
