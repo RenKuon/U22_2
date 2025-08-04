@@ -1,21 +1,24 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="プロコン部チーム_0622_TEST.Properties" GeneratedClassName="Settings">
-	<Profiles />
-	<Settings>
-		<Setting Name="folderpath" Type="System.String" Scope="User">
-			<Value Profile="(Default)" />
-		</Setting>
-		<Setting Name="raw_movie_filepath" Type="System.String" Scope="User">
-			<Value Profile="(Default)" />
-		</Setting>
-		<Setting Name="cut_start_time" Type="System.TimeSpan" Scope="User">
-			<Value Profile="(Default)">00:00:00</Value>
-		</Setting>
-		<Setting Name="cut_end_time" Type="System.TimeSpan" Scope="User">
-			<Value Profile="(Default)">00:00:00</Value>
-		</Setting>
-		<Setting Name="recordtime" Type="System.Int32" Scope="User">
-			<Value Profile="(Default)">0</Value>
-		</Setting>
-	</Settings>
+  <Profiles />
+  <Settings>
+    <Setting Name="folderpath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="raw_movie_filepath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="cut_start_time" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:00</Value>
+    </Setting>
+    <Setting Name="cut_end_time" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:00</Value>
+    </Setting>
+    <Setting Name="recordtime" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="set_output_device" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
 </SettingsFile>

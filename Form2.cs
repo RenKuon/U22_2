@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Wave;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace プロコン部チーム_0622_TEST
 {
@@ -29,6 +31,31 @@ namespace プロコン部チーム_0622_TEST
             this.ActiveControl = null;
             textBox1.ReadOnly = true;
             textBox1.Text = Properties.Settings.Default.folderpath;     // 設定からフォルダパスを取得
+            set_output_device_comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
+
+
+            // コンボボックスをクリア
+            set_output_device_comboBox.Items.Clear();
+
+            // NAudioを使ってオーディオ出力デバイスの数を取得
+            int deviceCount = WaveOut.DeviceCount;
+
+            // 各デバイスの情報を取得し、コンボボックスに追加
+            for (int i = 0; i < deviceCount; i++)
+            {
+                var caps = WaveOut.GetCapabilities(i);
+                set_output_device_comboBox.Items.Add(caps.ProductName);
+
+                if (Properties.Settings.Default.set_output_device == caps.ProductName)
+                {
+                    set_output_device_comboBox.SelectedIndex = i; // 設定されているデバイスを選択
+                }
+                else
+                {
+                    set_output_device_comboBox.SelectedIndex = 0; // デフォルトで最初のデバイスを選択
+                }
+            }
         }
 
 
@@ -105,5 +132,12 @@ namespace プロコン部チーム_0622_TEST
             MessageBox.Show("出力ファイルのパス指定が完了しました。");
         }
 
+
+        private void set_output_device_comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // 選択されたデバイスのインデックスを取得
+            Properties.Settings.Default.set_output_device = set_output_device_comboBox.SelectedItem.ToString();
+
+        }
     }
 }

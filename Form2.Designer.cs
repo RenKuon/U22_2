@@ -42,6 +42,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.set_recordtime_label = new System.Windows.Forms.Label();
+            this.set_output_device_label = new System.Windows.Forms.Label();
+            this.set_output_device_comboBox = new System.Windows.Forms.ComboBox();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +52,7 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.textBox1, 3);
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Location = new System.Drawing.Point(2, 60);
+            this.textBox1.Location = new System.Drawing.Point(2, 48);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(572, 22);
@@ -63,7 +65,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
             this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label1.Font = new System.Drawing.Font("Noto Sans JP", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(2, 24);
+            this.label1.Location = new System.Drawing.Point(2, 12);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(508, 34);
@@ -74,7 +76,7 @@
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Top;
             this.button2.Font = new System.Drawing.Font("Noto Sans JP Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button2.Location = new System.Drawing.Point(2, 96);
+            this.button2.Location = new System.Drawing.Point(2, 84);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(252, 42);
@@ -143,7 +145,7 @@
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Top;
             this.button1.Font = new System.Drawing.Font("Noto Sans JP", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(578, 60);
+            this.button1.Location = new System.Drawing.Point(578, 48);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(60, 32);
@@ -164,13 +166,17 @@
             this.tableLayoutPanel1.Controls.Add(this.button1, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.set_recordtime_label, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.set_output_device_label, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.set_output_device_comboBox, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(640, 375);
             this.tableLayoutPanel1.TabIndex = 5;
@@ -181,11 +187,33 @@
             this.set_recordtime_label.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.set_recordtime_label, 2);
             this.set_recordtime_label.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.set_recordtime_label.Location = new System.Drawing.Point(259, 105);
+            this.set_recordtime_label.Location = new System.Drawing.Point(259, 93);
             this.set_recordtime_label.Name = "set_recordtime_label";
             this.set_recordtime_label.Size = new System.Drawing.Size(279, 23);
             this.set_recordtime_label.TabIndex = 5;
             this.set_recordtime_label.Text = "設定されている録画時間:0分";
+            // 
+            // set_output_device_label
+            // 
+            this.set_output_device_label.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.set_output_device_label.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.set_output_device_label, 2);
+            this.set_output_device_label.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.set_output_device_label.Location = new System.Drawing.Point(3, 128);
+            this.set_output_device_label.Name = "set_output_device_label";
+            this.set_output_device_label.Size = new System.Drawing.Size(212, 23);
+            this.set_output_device_label.TabIndex = 6;
+            this.set_output_device_label.Text = "録画する出力デバイス";
+            // 
+            // set_output_device_comboBox
+            // 
+            this.set_output_device_comboBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.set_output_device_comboBox.FormattingEnabled = true;
+            this.set_output_device_comboBox.Location = new System.Drawing.Point(3, 154);
+            this.set_output_device_comboBox.Name = "set_output_device_comboBox";
+            this.set_output_device_comboBox.Size = new System.Drawing.Size(250, 23);
+            this.set_output_device_comboBox.TabIndex = 7;
+            this.set_output_device_comboBox.SelectedValueChanged += new System.EventHandler(this.set_output_device_comboBox_SelectedIndexChanged);
             // 
             // Form2
             // 
@@ -218,5 +246,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuitem6;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuitem7;
         private System.Windows.Forms.Label set_recordtime_label;
+        private System.Windows.Forms.Label set_output_device_label;
+        private System.Windows.Forms.ComboBox set_output_device_comboBox;
     }
 }

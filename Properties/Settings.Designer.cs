@@ -82,5 +82,17 @@ namespace プロコン部チーム_0622_TEST.Properties {
                 this["recordtime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string set_output_device {
+            get {
+                return ((string)(this["set_output_device"]));
+            }
+            set {
+                this["set_output_device"] = value;
+            }
+        }
     }
 }
