@@ -265,5 +265,13 @@ namespace プロコン部チーム_0622_TEST
 
             }
         }
+
+        private void stop_rec_keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt && e.KeyCode == Keys.F10)
+            {
+                button2_Click(sender, e);
+            }
+        }
     }
 }
