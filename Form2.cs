@@ -42,22 +42,25 @@ namespace プロコン部チーム_0622_TEST
             int deviceCount = WaveOut.DeviceCount;
 
             // 各デバイスの情報を取得し、コンボボックスに追加
-            for (int i = 0; i < deviceCount; i++)
+            if (!Properties.Settings.Default.set_output_device.Contains("ステレオ ミキサー"))
             {
-                var caps = WaveOut.GetCapabilities(i);
-                set_output_device_comboBox.Items.Add(caps.ProductName);
+                for (int i = 0; i < deviceCount; i++)
+                {
+                    var caps = WaveIn.GetCapabilities(i);
+                    set_output_device_comboBox.Items.Add(caps.ProductName);
 
-                if (Properties.Settings.Default.set_output_device == caps.ProductName)
-                {
-                    set_output_device_comboBox.SelectedIndex = i; // 設定されているデバイスを選択
+                    if (caps.ProductName.Contains("ステレオ ミキサー"))
+                    {
+                        set_output_device_comboBox.SelectedIndex = i; // デフォルトで選択
+                        Properties.Settings.Default.set_output_device = caps.ProductName; // 設定に保存
+                    }
                 }
-                else
+                if (!Properties.Settings.Default.set_output_device.Contains("ステレオ ミキサー"))
                 {
-                    set_output_device_comboBox.SelectedIndex = 0; // デフォルトで最初のデバイスを選択
+                    MessageBox.Show("ステレオ ミキサーが見つかりません。ステレオミキサーを有効にしてください。");
                 }
             }
         }
-
 
 
 
@@ -112,7 +115,7 @@ namespace プロコン部チーム_0622_TEST
         private void set_record_time(int minutes)
         {
             Properties.Settings.Default.recordtime = minutes * 60; // 分を秒に変換
-            MessageBox.Show($"録画時間を{minutes}分に設定しました。");
+            set_recordtime_label.Text = $"設定されている録画時間:{minutes}分";
         }
 
 

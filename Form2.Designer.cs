@@ -201,9 +201,9 @@
             this.set_output_device_label.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.set_output_device_label.Location = new System.Drawing.Point(3, 128);
             this.set_output_device_label.Name = "set_output_device_label";
-            this.set_output_device_label.Size = new System.Drawing.Size(212, 23);
+            this.set_output_device_label.Size = new System.Drawing.Size(166, 23);
             this.set_output_device_label.TabIndex = 6;
-            this.set_output_device_label.Text = "録画する出力デバイス";
+            this.set_output_device_label.Text = "録音するデバイス";
             // 
             // set_output_device_comboBox
             // 

@@ -109,7 +109,7 @@ namespace プロコン部チーム_0622_TEST
                         using (var ffmpeg = new Process())
                         {
 
-                            string set_output_device = "ステレオ ミキサー (Realtek(R) Audio)";
+                            string set_output_device = Properties.Settings.Default.set_output_device;
 
                             ffmpeg.StartInfo.FileName = "ffmpeg.exe";
                             ffmpeg.StartInfo.Arguments =
