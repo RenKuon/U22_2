@@ -19,6 +19,10 @@ namespace プロコン部チーム_0622_TEST
         {
             InitializeComponent();
             this.AutoScaleMode = AutoScaleMode.Dpi;
+
+            set_recordtime_label.Text = $"設定されている録画時間:{Properties.Settings.Default.recordtime / 60}分"; // 設定から録画時間を取得して表示
+
+
         }
         public static class AppState
         {
@@ -34,33 +38,33 @@ namespace プロコン部チーム_0622_TEST
             set_output_device_comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
 
-
             // コンボボックスをクリア
             set_output_device_comboBox.Items.Clear();
 
             // NAudioを使ってオーディオ出力デバイスの数を取得
-            int deviceCount = WaveOut.DeviceCount;
+            int deviceCount = WaveIn.DeviceCount;
 
-            // 各デバイスの情報を取得し、コンボボックスに追加
-            if (!Properties.Settings.Default.set_output_device.Contains("ステレオ ミキサー"))
+
+            for (int i = 0; i < deviceCount; i++)
             {
-                for (int i = 0; i < deviceCount; i++)
-                {
-                    var caps = WaveIn.GetCapabilities(i);
-                    set_output_device_comboBox.Items.Add(caps.ProductName);
+                var caps = WaveIn.GetCapabilities(i);
+                set_output_device_comboBox.Items.Add(caps.ProductName);
 
-                    if (caps.ProductName.Contains("ステレオ ミキサー"))
-                    {
-                        set_output_device_comboBox.SelectedIndex = i; // デフォルトで選択
-                        Properties.Settings.Default.set_output_device = caps.ProductName; // 設定に保存
-                    }
-                }
-                if (!Properties.Settings.Default.set_output_device.Contains("ステレオ ミキサー"))
+                if (caps.ProductName.Contains("ステレオ ミキサー"))
                 {
-                    MessageBox.Show("ステレオ ミキサーが見つかりません。ステレオミキサーを有効にしてください。");
+                    set_output_device_comboBox.SelectedIndex = i; // デフォルトで選択
+                    Properties.Settings.Default.set_output_device = caps.ProductName; // 設定に保存
+                    Properties.Settings.Default.Save(); // 設定を保存
                 }
             }
+            if (!Properties.Settings.Default.set_output_device.Contains("ステレオ ミキサー"))
+            {
+                MessageBox.Show("ステレオ ミキサーが見つかりません。ステレオミキサーを有効にしてください。");
+            }
         }
+
+
+
 
 
 
@@ -116,6 +120,7 @@ namespace プロコン部チーム_0622_TEST
         {
             Properties.Settings.Default.recordtime = minutes * 60; // 分を秒に変換
             set_recordtime_label.Text = $"設定されている録画時間:{minutes}分";
+            Properties.Settings.Default.Save(); // 設定を保存
         }
 
 
@@ -138,9 +143,15 @@ namespace プロコン部チーム_0622_TEST
 
         private void set_output_device_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // 選択されたデバイスのインデックスを取得
-            Properties.Settings.Default.set_output_device = set_output_device_comboBox.SelectedItem.ToString();
-
+            if (!set_output_device_comboBox.SelectedItem.ToString().Contains("ステレオ ミキサー"))
+            {
+                MessageBox.Show("ステレオ ミキサーが見つかりません。ステレオミキサーを有効にしてください。");
+            }
+            else
+            {
+                Properties.Settings.Default.set_output_device = set_output_device_comboBox.SelectedItem.ToString(); // 設定に保存
+                Properties.Settings.Default.Save(); // 設定を保存
+            }
         }
     }
 }
