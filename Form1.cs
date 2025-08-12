@@ -11,13 +11,31 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static プロコン部チーム_0622_TEST.Form2;
+using System.Runtime.InteropServices;
+
 
 namespace プロコン部チーム_0622_TEST
 {
     public partial class Form1 : Form
     {
+        //ショートカット用registerhotkey
+        const int HOTKEY_ID = 1;
+        // Windows APIをインポート
+        [DllImport("user32.dll")]
+        private static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vk);
+
+        [DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        private const int MOD_ALT = 0x0001;
+
+        private const int WM_HOTKEY = 0x0312;
+
+
+
         FFmpegRecorder recorder;
+
+        private bool recording = false;
 
         public Form1()
         {
@@ -64,7 +82,7 @@ namespace プロコン部チーム_0622_TEST
                 return;
             }
 
-            MessageBox.Show("録画を開始しました。");
+            recording = true;
             button1.Enabled = false;
             button2.Visible = true;
             label1.Visible = true;
@@ -107,6 +125,14 @@ namespace プロコン部チーム_0622_TEST
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Alt + F10 をグローバルホットキーとして登録
+            RegisterHotKey(this.Handle, HOTKEY_ID, MOD_ALT, (int)Keys.F10);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // アプリケーション終了時にホットキーを解除
+            UnregisterHotKey(this.Handle, HOTKEY_ID);
         }
 
         public class FFmpegRecorder
@@ -270,11 +296,22 @@ namespace プロコン部チーム_0622_TEST
             }
         }
 
-        private void stop_rec_keydown(object sender, KeyEventArgs e)
+        protected override void WndProc(ref Message m)
         {
-            if (e.Alt && e.KeyCode == Keys.F10)
+            base.WndProc(ref m);
+
+            // WM_HOTKEYメッセージをチェック
+            if (m.Msg == WM_HOTKEY)
             {
-                button2_Click(sender, e);
+                // 登録したホットキーIDが一致するかチェック
+                if (m.WParam.ToInt32() == HOTKEY_ID)
+                {
+                    if (recording)
+                    {
+                        // 録画中なら録画停止ボタンをクリックしたのと同じ処理を呼び出す
+                        button2_Click(this, EventArgs.Empty);
+                    }
+                }
             }
         }
     }
