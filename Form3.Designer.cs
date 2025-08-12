@@ -89,11 +89,12 @@
             // output_filename_textbox
             // 
             this.output_filename_textbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.output_filename_textbox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.output_filename_textbox.Location = new System.Drawing.Point(2, 201);
             this.output_filename_textbox.Margin = new System.Windows.Forms.Padding(2);
             this.output_filename_textbox.MaxLength = 100;
             this.output_filename_textbox.Name = "output_filename_textbox";
-            this.output_filename_textbox.Size = new System.Drawing.Size(196, 22);
+            this.output_filename_textbox.Size = new System.Drawing.Size(196, 37);
             this.output_filename_textbox.TabIndex = 10;
             this.output_filename_textbox.Enter += new System.EventHandler(this.output_textbox_enter);
             this.output_filename_textbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.output_filename_textbox_keydown);
@@ -114,8 +115,8 @@
             // 
             // cut_end_time_display_label
             // 
-            this.cut_end_time_display_label.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.cut_end_time_display_label.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cut_end_time_display_label.AutoSize = true;
             this.cut_end_time_display_label.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -142,8 +143,8 @@
             // 
             // movie_trackbar
             // 
-            this.movie_trackbar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.movie_trackbar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.movie_trackbar, 6);
             this.movie_trackbar.Location = new System.Drawing.Point(2, 501);
@@ -293,8 +294,8 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.panel1, 5);
             this.panel1.Controls.Add(this.label2);

@@ -94,14 +94,12 @@ namespace プロコン部チーム_0622_TEST
             string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
             string outputFile = $"recording_{timestamp}.mp4";
             string outputFilePath = Path.Combine(Properties.Settings.Default.folderpath, outputFile);
-            Properties.Settings.Default.raw_movie_filepath = outputFilePath;
 
             recorder.StartRecording(outputFilePath);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("録画を停止しました。");
             button1.Enabled = true;
             button2.Visible = false;
             label1.Visible = false;
@@ -231,7 +229,7 @@ namespace プロコン部チーム_0622_TEST
 
 
                 string baseName = $"combined_{DateTime.Now:yyyy_MM_dd}";
-                string outputFolder = Path.GetDirectoryName(Properties.Settings.Default.raw_movie_filepath);
+                string outputFolder = Properties.Settings.Default.folderpath;
                 string finalName = baseName + ".mp4";
                 int suffix = 1;
                 while (File.Exists(Path.Combine(outputFolder, finalName)))
@@ -262,7 +260,10 @@ namespace プロコン部チーム_0622_TEST
                     }
                 }
 
-                MessageBox.Show("録画ファイルの保存が完了しました。");
+                Properties.Settings.Default.raw_movie_filepath = finalPath;
+                Form3 form3 = new Form3();
+                form3.Show();
+
 
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
