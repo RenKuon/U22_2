@@ -275,14 +275,7 @@ namespace プロコン部チーム_0622_TEST
             }
         }
 
-<<<<<<< HEAD
-
-
-
-        private void stop_rec_keydown(object sender, KeyEventArgs e)
-=======
         protected override void WndProc(ref Message m)
->>>>>>> 2491e61cba2efdddc3d97f143b2da9507cc29539
         {
             base.WndProc(ref m);
 
