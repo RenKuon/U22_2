@@ -111,97 +111,91 @@ namespace プロコン部チーム_0622_TEST
 
         public class FFmpegRecorder
         {
-            private List<string> segmentFiles = new List<string>();
-            private string segmentFolder;
+            private Process ffmpegProcess;
             private CancellationTokenSource cts;
-            private int segmentDuration = 5;
-            StringBuilder outputBuilder = new StringBuilder();
-            StringBuilder errorBuilder = new StringBuilder();
+            private string tempRecordingPath;
+            private StringBuilder outputBuilder = new StringBuilder();
+            private StringBuilder errorBuilder = new StringBuilder();
 
             public void StartRecording(string outputFilePath)
             {
-                segmentFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "segments");
-                Directory.CreateDirectory(segmentFolder);
-                segmentFiles.Clear();
                 cts = new CancellationTokenSource();
 
-                int maxSegments = (int)Math.Ceiling((double)Properties.Settings.Default.recordtime / segmentDuration);
-                string dateStamp = DateTime.Now.ToString("yyyy_MM_dd");
-                int i = 0;
+                string segmentFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "segments");
+                Directory.CreateDirectory(segmentFolder);
+                tempRecordingPath = Path.Combine(segmentFolder, "temp_recording.mp4");
 
-                Task.Run(() =>
-                {
-                    while (!cts.IsCancellationRequested)
-                    {
-                        int segmentIndex = i % maxSegments;
-                        string segmentFile = Path.Combine(segmentFolder, $"{dateStamp}_{segmentIndex}.ts");
+                string set_output_device = Properties.Settings.Default.set_output_device;
 
-                        if (!segmentFiles.Contains(segmentFile))
-                        {
-                            segmentFiles.Add(segmentFile);
-                        }
+                ffmpegProcess = new Process();
+                ffmpegProcess.StartInfo.FileName = "ffmpeg.exe";
+                ffmpegProcess.StartInfo.Arguments =
+                    $"-y -video_size 1920x1080 -framerate 60 " +
+                    $"-f gdigrab -i desktop " +
+                    $"-f dshow -i audio=\"{set_output_device}\" " +
+                    $"-map 0:v:0 -map 1:a:0 " +
+                    $"-vcodec libx264 -pix_fmt yuv420p -acodec aac -b:a 320k -ac 2 -ar 44100 " +
+                    $"\"{tempRecordingPath}\"";
 
-                        using (var ffmpeg = new Process())
-                        {
+                ffmpegProcess.StartInfo.CreateNoWindow = true;
+                ffmpegProcess.StartInfo.UseShellExecute = false;
+                ffmpegProcess.StartInfo.RedirectStandardOutput = false;
+                ffmpegProcess.StartInfo.RedirectStandardError = false;
 
-                            string set_output_device = Properties.Settings.Default.set_output_device;
-
-                            ffmpeg.StartInfo.FileName = "ffmpeg.exe";
-                            ffmpeg.StartInfo.Arguments =
-                                $"-y " +
-                                $"-video_size 1920x1080 -framerate 60 " +
-                                $"-f gdigrab -i desktop " +
-                                $"-f dshow -i audio=\"{set_output_device}\" " +
-                                $"-t {segmentDuration} " +
-                                $"-map 0:v:0 -map 1:a:0 " +
-                                $"-vcodec libx264 -pix_fmt yuv420p -acodec aac -b:a 320k -ac 2 -ar 44100 " +
-                                $"-reset_timestamps 1 " +
-                                $"-f mpegts \"{segmentFile}\"";
-                            ffmpeg.StartInfo.CreateNoWindow = true;
-                            ffmpeg.StartInfo.UseShellExecute = false;
-                            ffmpeg.Start();
-                            ffmpeg.WaitForExit();
-                        }
-
-                        if (!File.Exists(segmentFile))
-                        {
-                            MessageBox.Show($"録画に失敗しました: {segmentFile}");
-                        }
-
-                        i++;
-                    }
-                });
+                ffmpegProcess.Start();
             }
 
             public void StopRecording()
             {
-                cts?.Cancel();
+                try
+                {
+                    if (ffmpegProcess != null && !ffmpegProcess.HasExited)
+                    {
+                        ffmpegProcess.Kill();
+                        ffmpegProcess.WaitForExit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"録画停止に失敗しました: {ex.Message}");
+                    return;
+                }
 
+                string segmentFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "segments");
                 string logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
                 Directory.CreateDirectory(logFolder);
                 string logFilePath = Path.Combine(logFolder, $"ffmpeg_log_{DateTime.Now:yyyyMMdd_HHmmss}.txt");
                 File.WriteAllText(logFilePath, outputBuilder.ToString() + Environment.NewLine + errorBuilder.ToString());
 
-                if (segmentFiles.Count == 0)
+                if (!File.Exists(tempRecordingPath))
                 {
-                    MessageBox.Show("連結対象のセグメントファイルがありません。");
+                    MessageBox.Show("録画ファイルが存在しません。");
                     return;
                 }
 
-
-                segmentFiles = segmentFiles
-                    .Where(File.Exists)
-                    .OrderBy(file => File.GetLastWriteTimeUtc(file))
-                    .ToList();
-
-                string concatListPath = Path.Combine(segmentFolder, "concat.txt");
-                using (StreamWriter writer = new StreamWriter(concatListPath, false, new UTF8Encoding(false))) // ← BOMなし
+                // 録画時間取得
+                double durationSeconds;
+                using (var ffprobe = new Process())
                 {
-                    foreach (var file in segmentFiles)
+                    ffprobe.StartInfo.FileName = "ffprobe.exe";
+                    ffprobe.StartInfo.Arguments = $"-v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 \"{tempRecordingPath}\"";
+                    ffprobe.StartInfo.RedirectStandardOutput = true;
+                    ffprobe.StartInfo.UseShellExecute = false;
+                    ffprobe.StartInfo.CreateNoWindow = true;
+
+                    ffprobe.Start();
+                    string output = ffprobe.StandardOutput.ReadToEnd();
+                    ffprobe.WaitForExit();
+
+                    if (!double.TryParse(output.Trim(), out durationSeconds))
                     {
-                        writer.WriteLine($"file '{file.Replace("\\", "/")}'");
+                        MessageBox.Show("録画時間の取得に失敗しました。");
+                        return;
                     }
                 }
+
+                int recordtime = Properties.Settings.Default.recordtime;
+                double startTime = Math.Max(0, durationSeconds - recordtime);
 
 
                 string baseName = $"combined_{DateTime.Now:yyyy_MM_dd}";
@@ -219,7 +213,9 @@ namespace プロコン部チーム_0622_TEST
                 using (var ffmpeg = new Process())
                 {
                     ffmpeg.StartInfo.FileName = "ffmpeg.exe";
-                    ffmpeg.StartInfo.Arguments = $"-y -f concat -safe 0 -i \"{concatListPath}\" -c copy -f mp4 \"{finalPath}\"";
+                    ffmpeg.StartInfo.Arguments =
+                        $"-y -ss {startTime} -i \"{tempRecordingPath}\" -t {recordtime} -c:v libx264 -c:a aac \"{finalPath}\"";
+
                     ffmpeg.StartInfo.CreateNoWindow = true;
                     ffmpeg.StartInfo.UseShellExecute = false;
                     ffmpeg.StartInfo.RedirectStandardOutput = false;
@@ -230,7 +226,7 @@ namespace プロコン部チーム_0622_TEST
 
                     if (ffmpeg.ExitCode != 0 || !File.Exists(finalPath))
                     {
-                        MessageBox.Show("連結に失敗しました。詳細はログをご確認ください。");
+                        MessageBox.Show("録画の切り出しに失敗しました。詳細はログをご確認ください。");
                         File.AppendAllText(logFilePath, $"\n[ERROR] FFmpeg exited with code {ffmpeg.ExitCode}\n");
                         return;
                     }
@@ -238,37 +234,22 @@ namespace プロコン部チーム_0622_TEST
 
                 MessageBox.Show("録画ファイルの保存が完了しました。");
 
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-
                 try
                 {
-                    string[] files = Directory.GetFiles(segmentFolder);
-                    foreach (var file in files)
-                    {
-                        int retry = 0;
-                        while (retry < 3)
-                        {
-                            try
-                            {
-                                File.Delete(file);
-                                break;
-                            }
-                            catch (IOException)
-                            {
-                                Thread.Sleep(500); // 少し待って再試行
-                                retry++;
-                            }
-                        }
-                    }
+                    File.Delete(tempRecordingPath);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"セグメントファイルの削除に失敗しました: {ex.Message}");
+                    MessageBox.Show($"一時録画ファイルの削除に失敗しました: {ex.Message}");
                 }
 
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
         }
+
+
+
 
         private void stop_rec_keydown(object sender, KeyEventArgs e)
         {
