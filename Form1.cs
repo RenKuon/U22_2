@@ -36,6 +36,7 @@ namespace プロコン部チーム_0622_TEST
         FFmpegRecorder recorder;
 
         private bool recording = false;
+        private bool instantreplay_mode = false;
 
         public Form1()
         {
@@ -47,6 +48,23 @@ namespace プロコン部チーム_0622_TEST
 
         // ✅ イベントハンドラはここ（Form1内）に定義すべき
         private void button1_Click(object sender, EventArgs e)
+        {
+            if (instantreplay_mode)
+            {
+                recorder.stop_instantreplay();
+                instantreplay_mode = false;
+                button1.Enabled = true;
+                label1.Visible = false;
+                button3.Enabled = true;
+                button1.Text = "インスタントリプレイON";
+            }
+            else
+            {
+                instantreplay_mode_change();
+            }
+        }
+
+        public void instantreplay_mode_change()
         {
             if (Properties.Settings.Default.folderpath == "")
             {
@@ -82,12 +100,12 @@ namespace プロコン部チーム_0622_TEST
                 return;
             }
 
-            recording = true;
-            button1.Enabled = false;
+            button1.Text = "インスタントリプレイOFF";
+            instantreplay_mode = true;
+
             button2.Visible = true;
             label1.Visible = true;
             button3.Enabled = false;
-            button4.Enabled = false;
 
             recorder = new FFmpegRecorder();
 
@@ -98,15 +116,13 @@ namespace プロコン部チーム_0622_TEST
             recorder.StartRecording(outputFilePath);
         }
 
+
         private void button2_Click(object sender, EventArgs e)
         {
-            button1.Enabled = true;
-            button2.Visible = false;
-            label1.Visible = false;
-            button3.Enabled = true;
-            button4.Enabled = true;
-
-            recorder.StopRecording();
+            if (recorder.StopRecording())
+            {
+                instantreplay_mode_change();
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -131,6 +147,7 @@ namespace プロコン部チーム_0622_TEST
         {
             // アプリケーション終了時にホットキーを解除
             UnregisterHotKey(this.Handle, HOTKEY_ID);
+            recorder.stop_instantreplay();
         }
 
         public class FFmpegRecorder
@@ -197,7 +214,48 @@ namespace プロコン部チーム_0622_TEST
                 });
             }
 
-            public void StopRecording()
+            public void GC_Collect()
+            {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                try
+                {
+                    string[] files = Directory.GetFiles(segmentFolder);
+                    foreach (var file in files)
+                    {
+                        int retry = 0;
+                        while (retry < 3)
+                        {
+                            try
+                            {
+                                File.Delete(file);
+                                break;
+                            }
+                            catch (IOException)
+                            {
+                                Thread.Sleep(500); // 少し待って再試行
+                                retry++;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"セグメントファイルの削除に失敗しました: {ex.Message}");
+                }
+
+            }
+
+
+            public void stop_instantreplay()
+            {
+                cts?.Cancel();
+                GC_Collect();
+            }
+
+
+            public bool StopRecording()
             {
                 cts?.Cancel();
 
@@ -209,7 +267,7 @@ namespace プロコン部チーム_0622_TEST
                 if (segmentFiles.Count == 0)
                 {
                     MessageBox.Show("連結対象のセグメントファイルがありません。");
-                    return;
+                    return false;
                 }
 
 
@@ -256,7 +314,7 @@ namespace プロコン部チーム_0622_TEST
                     {
                         MessageBox.Show("連結に失敗しました。詳細はログをご確認ください。");
                         File.AppendAllText(logFilePath, $"\n[ERROR] FFmpeg exited with code {ffmpeg.ExitCode}\n");
-                        return;
+                        return false;
                     }
                 }
 
@@ -264,35 +322,8 @@ namespace プロコン部チーム_0622_TEST
                 Form3 form3 = new Form3();
                 form3.Show();
 
-
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-
-                try
-                {
-                    string[] files = Directory.GetFiles(segmentFolder);
-                    foreach (var file in files)
-                    {
-                        int retry = 0;
-                        while (retry < 3)
-                        {
-                            try
-                            {
-                                File.Delete(file);
-                                break;
-                            }
-                            catch (IOException)
-                            {
-                                Thread.Sleep(500); // 少し待って再試行
-                                retry++;
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"セグメントファイルの削除に失敗しました: {ex.Message}");
-                }
+                GC_Collect();
+                return true;
 
             }
         }
@@ -307,7 +338,7 @@ namespace プロコン部チーム_0622_TEST
                 // 登録したホットキーIDが一致するかチェック
                 if (m.WParam.ToInt32() == HOTKEY_ID)
                 {
-                    if (recording)
+                    if (instantreplay_mode)
                     {
                         // 録画中なら録画停止ボタンをクリックしたのと同じ処理を呼び出す
                         button2_Click(this, EventArgs.Empty);
