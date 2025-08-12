@@ -50,8 +50,12 @@ namespace プロコン部チーム_0622_TEST
                     Properties.Settings.Default.Save(); // 設定を保存
                 }
             }
-            return;
 
+            if (!Properties.Settings.Default.set_output_device.Contains("ステレオ ミキサー"))
+            {
+                MessageBox.Show("ステレオ ミキサーが見つかりません。ステレオミキサーを有効にしてください。");
+                return;
+            }
 
 
             if (Properties.Settings.Default.recordtime <= 0)
