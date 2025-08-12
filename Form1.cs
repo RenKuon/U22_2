@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Wave;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,6 +30,36 @@ namespace プロコン部チーム_0622_TEST
         // ✅ イベントハンドラはここ（Form1内）に定義すべき
         private void button1_Click(object sender, EventArgs e)
         {
+            if (Properties.Settings.Default.folderpath == "")
+            {
+                MessageBox.Show("保存先フォルダが設定されていません。設定を行ってください。");
+                return;
+            }
+
+
+            // NAudioを使ってオーディオ出力デバイスの数を取得
+            int deviceCount = WaveIn.DeviceCount;
+
+            for (int i = 0; i < deviceCount; i++)
+            {
+                var caps = WaveIn.GetCapabilities(i);
+
+                if (caps.ProductName.Contains("ステレオ ミキサー"))
+                {
+                    Properties.Settings.Default.set_output_device = caps.ProductName; // 設定に保存
+                    Properties.Settings.Default.Save(); // 設定を保存
+                }
+            }
+            return;
+
+
+
+            if (Properties.Settings.Default.recordtime <= 0)
+            {
+                MessageBox.Show("録画時間が設定されていません。設定を行ってください。");
+                return;
+            }
+
             MessageBox.Show("録画を開始しました。");
             button1.Enabled = false;
             button2.Visible = true;
@@ -109,7 +140,7 @@ namespace プロコン部チーム_0622_TEST
                         using (var ffmpeg = new Process())
                         {
 
-                            string set_output_device = "ステレオ ミキサー (Realtek(R) Audio)";
+                            string set_output_device = Properties.Settings.Default.set_output_device;
 
                             ffmpeg.StartInfo.FileName = "ffmpeg.exe";
                             ffmpeg.StartInfo.Arguments =
@@ -232,6 +263,14 @@ namespace プロコン部チーム_0622_TEST
                     MessageBox.Show($"セグメントファイルの削除に失敗しました: {ex.Message}");
                 }
 
+            }
+        }
+
+        private void stop_rec_keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt && e.KeyCode == Keys.F10)
+            {
+                button2_Click(sender, e);
             }
         }
     }
