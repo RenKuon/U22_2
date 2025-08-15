@@ -170,7 +170,7 @@ namespace プロコン部チーム_0622_TEST
                 string set_output_device = Properties.Settings.Default.set_output_device;
 
                 ffmpegProcess = new Process();
-                ffmpegProcess.StartInfo.FileName = "ffmpeg.exe";
+                ffmpegProcess.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg.exe");
                 ffmpegProcess.StartInfo.Arguments =
                     $"-y -video_size 1920x1080 -framerate 60 " +
                     $"-f gdigrab -i desktop " +
@@ -183,46 +183,31 @@ namespace プロコン部チーム_0622_TEST
                 ffmpegProcess.StartInfo.UseShellExecute = false;
                 ffmpegProcess.StartInfo.RedirectStandardOutput = false;
                 ffmpegProcess.StartInfo.RedirectStandardError = false;
+                ffmpegProcess.StartInfo.RedirectStandardInput = true;
 
                 ffmpegProcess.Start();
             }
-            public void GC_Collect()
-            {
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
 
+            public void stop_instantreplay()
+            {
                 try
                 {
-                    string[] files = Directory.GetFiles(segmentFolder);
-                    foreach (var file in files)
+                    if (ffmpegProcess != null && !ffmpegProcess.HasExited)
                     {
-                        int retry = 0;
-                        while (retry < 3)
+                        ffmpegProcess.StandardInput.WriteLine("q");
+
+                        // プロセスが終了するまで最大5秒待機
+                        if (!ffmpegProcess.WaitForExit(5000))
                         {
-                            try
-                            {
-                                File.Delete(file);
-                                break;
-                            }
-                            catch (IOException)
-                            {
-                                Thread.Sleep(500); // 少し待って再試行
-                                retry++;
-                            }
+                            // 5秒経っても終了しない場合は強制終了
+                            ffmpegProcess.Kill();
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"セグメントファイルの削除に失敗しました: {ex.Message}");
+                    Debug.WriteLine($"FFmpegプロセスの停止中にエラーが発生しました: {ex.Message}");
                 }
-
-            }
-
-            public void stop_instantreplay()
-            {
-                cts?.Cancel();
-                GC_Collect();
             }
 
             public bool StopRecording()
@@ -231,7 +216,7 @@ namespace プロコン部チーム_0622_TEST
                 {
                     if (ffmpegProcess != null && !ffmpegProcess.HasExited)
                     {
-                        ffmpegProcess.Kill();
+                        ffmpegProcess.StandardInput.WriteLine("q");
                         ffmpegProcess.WaitForExit();
                     }
                 }
@@ -240,6 +225,7 @@ namespace プロコン部チーム_0622_TEST
                     MessageBox.Show($"録画停止に失敗しました: {ex.Message}");
                     return false;
                 }
+
 
                 segmentFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "segments");
                 string logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
@@ -257,7 +243,7 @@ namespace プロコン部チーム_0622_TEST
                 double durationSeconds;
                 using (var ffprobe = new Process())
                 {
-                    ffprobe.StartInfo.FileName = "C:\\VisualStudio\\U22\\U22_2\\bin\\Debug\\ffprobe.exe";
+                    ffprobe.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffprobe.exe");
                     ffprobe.StartInfo.Arguments = $"-v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 \"{tempRecordingPath}\"";
                     ffprobe.StartInfo.RedirectStandardOutput = true;
                     ffprobe.StartInfo.UseShellExecute = false;
@@ -311,7 +297,7 @@ namespace プロコン部チーム_0622_TEST
                     }
                 }
 
-                MessageBox.Show("録画ファイルの保存が完了しました。");
+                //MessageBox.Show("録画ファイルの保存が完了しました。");
 
                 try
                 {
@@ -327,7 +313,6 @@ namespace プロコン部チーム_0622_TEST
                 Form3 form3 = new Form3();
                 form3.Show();
 
-                GC_Collect();
                 return true;
             }
         }
