@@ -30,6 +30,8 @@ namespace プロコン部チーム_0622_TEST
             this.ActiveControl = null;
             reference_textbox1.ReadOnly = true;
             reference_textbox1.Text = Properties.Settings.Default.folderpath;     // 設定からフォルダパスを取得
+            reference_textbox2.ReadOnly = true;
+            reference_textbox2.Text = Properties.Settings.Default.cut_folderpath; // 設定からカットフォルダパスを取得
             set_output_device_comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
 

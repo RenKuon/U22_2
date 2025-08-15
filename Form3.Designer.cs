@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
+            this.status_label = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.output_filename_textbox = new System.Windows.Forms.TextBox();
             this.cut_start_time_display_label = new System.Windows.Forms.Label();
@@ -39,12 +39,12 @@
             this.time_display_label = new System.Windows.Forms.Label();
             this.movie_trackbar = new System.Windows.Forms.TrackBar();
             this.pausebutton = new System.Windows.Forms.Button();
-            this.input_file_button = new System.Windows.Forms.Button();
+            this.inputfile_button = new System.Windows.Forms.Button();
             this.playbutton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cut_button = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             ((System.ComponentModel.ISupportInitialize)(this.movie_trackbar)).BeginInit();
@@ -57,20 +57,20 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.update_timer_tick);
             // 
-            // label2
+            // status_label
             // 
-            this.label2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(662, 167);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "実行中です";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label2.Visible = false;
+            this.status_label.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.status_label.Dock = System.Windows.Forms.DockStyle.Top;
+            this.status_label.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.status_label.ForeColor = System.Drawing.Color.Red;
+            this.status_label.Location = new System.Drawing.Point(0, 0);
+            this.status_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.status_label.Name = "status_label";
+            this.status_label.Size = new System.Drawing.Size(662, 167);
+            this.status_label.TabIndex = 13;
+            this.status_label.Text = "実行中です";
+            this.status_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.status_label.Visible = false;
             // 
             // label1
             // 
@@ -114,8 +114,8 @@
             // 
             // cut_end_time_display_label
             // 
-            this.cut_end_time_display_label.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.cut_end_time_display_label.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cut_end_time_display_label.AutoSize = true;
             this.cut_end_time_display_label.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -142,8 +142,8 @@
             // 
             // movie_trackbar
             // 
-            this.movie_trackbar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.movie_trackbar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.movie_trackbar, 6);
             this.movie_trackbar.Location = new System.Drawing.Point(2, 501);
@@ -170,18 +170,18 @@
             this.pausebutton.UseVisualStyleBackColor = true;
             this.pausebutton.Click += new System.EventHandler(this.pausebutton_Click);
             // 
-            // input_file_button
+            // inputfile_button
             // 
-            this.input_file_button.AutoSize = true;
-            this.input_file_button.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.input_file_button.Location = new System.Drawing.Point(647, 451);
-            this.input_file_button.Margin = new System.Windows.Forms.Padding(2);
-            this.input_file_button.Name = "input_file_button";
-            this.input_file_button.Size = new System.Drawing.Size(105, 46);
-            this.input_file_button.TabIndex = 5;
-            this.input_file_button.Text = "参照";
-            this.input_file_button.UseVisualStyleBackColor = true;
-            this.input_file_button.Click += new System.EventHandler(this.input_file_button_Click);
+            this.inputfile_button.AutoSize = true;
+            this.inputfile_button.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputfile_button.Location = new System.Drawing.Point(647, 451);
+            this.inputfile_button.Margin = new System.Windows.Forms.Padding(2);
+            this.inputfile_button.Name = "inputfile_button";
+            this.inputfile_button.Size = new System.Drawing.Size(105, 46);
+            this.inputfile_button.TabIndex = 5;
+            this.inputfile_button.Text = "参照";
+            this.inputfile_button.UseVisualStyleBackColor = true;
+            this.inputfile_button.Click += new System.EventHandler(this.input_file_button_Click);
             // 
             // playbutton
             // 
@@ -237,9 +237,9 @@
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.playbutton, 2, 7);
-            this.tableLayoutPanel1.Controls.Add(this.input_file_button, 4, 7);
+            this.tableLayoutPanel1.Controls.Add(this.inputfile_button, 4, 7);
             this.tableLayoutPanel1.Controls.Add(this.pausebutton, 3, 7);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 5, 7);
+            this.tableLayoutPanel1.Controls.Add(this.cut_button, 5, 7);
             this.tableLayoutPanel1.Controls.Add(this.movie_trackbar, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.time_display_label, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.cut_end_time_display_label, 0, 6);
@@ -266,25 +266,25 @@
             this.tableLayoutPanel1.TabStop = true;
             this.tableLayoutPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tablelayout_click);
             // 
-            // button1
+            // cut_button
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(756, 451);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 46);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "カット実行";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.cut_button.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cut_button.Location = new System.Drawing.Point(756, 451);
+            this.cut_button.Margin = new System.Windows.Forms.Padding(2);
+            this.cut_button.Name = "cut_button";
+            this.cut_button.Size = new System.Drawing.Size(108, 46);
+            this.cut_button.TabIndex = 0;
+            this.cut_button.Text = "カット実行";
+            this.cut_button.UseVisualStyleBackColor = true;
+            this.cut_button.Click += new System.EventHandler(this.cut_button_Click);
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.panel1, 5);
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.status_label);
             this.panel1.Controls.Add(this.axWindowsMediaPlayer1);
             this.panel1.Location = new System.Drawing.Point(202, 2);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
@@ -329,7 +329,7 @@
 
         #endregion
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label status_label;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox output_filename_textbox;
         private System.Windows.Forms.Label cut_start_time_display_label;
@@ -340,10 +340,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button playbutton;
-        private System.Windows.Forms.Button input_file_button;
+        private System.Windows.Forms.Button inputfile_button;
         private System.Windows.Forms.Button pausebutton;
         private System.Windows.Forms.Panel panel1;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cut_button;
     }
 }

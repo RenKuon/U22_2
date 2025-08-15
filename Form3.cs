@@ -26,7 +26,7 @@ namespace プロコン部チーム_0622_TEST
         {
             InitializeComponent(); //フォームの初期化
             this.MinimumSize = new System.Drawing.Size(1100, 700); //最小サイズを設定
-            this.label2.Visible = false; //実行中テキストを非表示にする
+            this.status_label.Visible = false; //実行中テキストを非表示にする
 
 
         }
@@ -42,7 +42,7 @@ namespace プロコン部チーム_0622_TEST
 
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private async void cut_button_Click(object sender, EventArgs e)
         {
             //カットする範囲の開始時間と終了時間を.settingsファイルから取得
             TimeSpan start_time = Properties.Settings.Default.cut_start_time;                           //カットする範囲の開始地点の指定変数
@@ -109,9 +109,9 @@ namespace プロコン部チーム_0622_TEST
 
 
             //カット処理
-            this.label2.Text = "実行中"; //実行中テキストを更新
-            this.label2.ForeColor = Color.Red; //実行中のテキスト色を赤に変更
-            this.label2.Visible = true; //実行中テキストを表示する
+            this.status_label.Text = "実行中"; //実行中テキストを更新
+            this.status_label.ForeColor = Color.Red; //実行中のテキスト色を赤に変更
+            this.status_label.Visible = true; //実行中テキストを表示する
 
             //カット処理の実行]
             string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c copy \"{output_filepath}\"";
@@ -140,10 +140,10 @@ namespace プロコン部チーム_0622_TEST
                 File.Move(output_filepath, input_filename);//カット後のファイルを元のファイル名に変更
             }
             //Form3終了処理
-            this.label2.Text = "実行完了"; //実行中テキストを更新
-            this.label2.ForeColor = Color.Green; //実行完了のテキスト色を緑に変更
+            this.status_label.Text = "実行完了"; //実行中テキストを更新
+            this.status_label.ForeColor = Color.Green; //実行完了のテキスト色を緑に変更
             await Task.Delay(2000); //2秒待機
-            this.label2.Visible = false; //実行中テキストを非表示にする
+            this.status_label.Visible = false; //実行中テキストを非表示にする
             this.Close();
 
 
