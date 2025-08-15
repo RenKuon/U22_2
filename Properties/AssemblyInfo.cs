@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般的な情報は、次の方法で制御されます
 // 制御されます。アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更します。
-[assembly: AssemblyTitle("プロコン部チーム_0622_TEST")]
+[assembly: AssemblyTitle("クリッパーInstantReplay")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Dynabook")]
-[assembly: AssemblyProduct("プロコン部チーム_0622_TEST")]
+[assembly: AssemblyProduct("クリッパー")]
 [assembly: AssemblyCopyright("Copyright © Dynabook 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
