@@ -109,17 +109,17 @@ namespace プロコン部チーム_0622_TEST
 
             recorder = new FFmpegRecorder();
 
-            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string timestamp = DateTime.Now.ToString("yyyyMMdd");
             string outputFile = $"recording_{timestamp}.mp4";
             string outputFilePath = Path.Combine(Properties.Settings.Default.folderpath, outputFile);
 
-            recorder.StartRecording(outputFilePath);
+            recorder.Start_Recording(outputFilePath);
         }
 
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (recorder.StopRecording())
+            if (recorder.Stop_Recording())
             {
                 instantreplay_mode_change();
             }
@@ -157,15 +157,15 @@ namespace プロコン部チーム_0622_TEST
             private string tempRecordingPath;
             private StringBuilder outputBuilder = new StringBuilder();
             private StringBuilder errorBuilder = new StringBuilder();
-            private string segmentFolder;
+            private string TempFolder;
 
-            public void StartRecording(string outputFilePath)
+            public void Start_Recording(string outputFilePath)
             {
                 cts = new CancellationTokenSource();
 
-                string segmentFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "segments");
-                Directory.CreateDirectory(segmentFolder);
-                tempRecordingPath = Path.Combine(segmentFolder, "temp_recording.mp4");
+                string TempFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp");
+                Directory.CreateDirectory(TempFolder);
+                tempRecordingPath = Path.Combine(TempFolder, "temp_recording.mp4");
 
                 string set_output_device = Properties.Settings.Default.set_output_device;
 
@@ -210,7 +210,7 @@ namespace プロコン部チーム_0622_TEST
                 }
             }
 
-            public bool StopRecording()
+            public bool Stop_Recording()
             {
                 try
                 {
@@ -227,7 +227,7 @@ namespace プロコン部チーム_0622_TEST
                 }
 
 
-                segmentFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "segments");
+                TempFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp");
                 string logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
                 Directory.CreateDirectory(logFolder);
                 string logFilePath = Path.Combine(logFolder, $"ffmpeg_log_{DateTime.Now:yyyyMMdd_HHmmss}.txt");
@@ -263,17 +263,19 @@ namespace プロコン部チーム_0622_TEST
                 int recordtime = Properties.Settings.Default.recordtime;
                 double startTime = Math.Max(0, durationSeconds - recordtime);
 
+
                 string baseName = $"combined_{DateTime.Now:yyyy_MM_dd}";
                 string outputFolder = Path.GetDirectoryName(Properties.Settings.Default.raw_movie_filepath);
                 string finalName = baseName + ".mp4";
+                string finalPath = Path.Combine(outputFolder, finalName);
+
                 int suffix = 1;
-                while (File.Exists(Path.Combine(outputFolder, finalName)))
+                while (File.Exists(finalPath))
                 {
                     finalName = $"{baseName}_{suffix}.mp4";
+                    finalPath = Path.Combine(outputFolder, finalName);
                     suffix++;
                 }
-
-                string finalPath = Path.Combine(outputFolder, finalName);
 
                 using (var ffmpeg = new Process())
                 {
