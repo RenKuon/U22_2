@@ -173,6 +173,7 @@ namespace プロコン部チーム_0622_TEST
                 ffmpegProcess.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffmpeg.exe");
                 ffmpegProcess.StartInfo.Arguments =
                     $"-y -video_size 1920x1080 -framerate 60 " +
+                    $"-f gdigrab -framerate 60 -draw_mouse 0 " +
                     $"-f gdigrab -i desktop " +
                     $"-f dshow -i audio=\"{set_output_device}\" " +
                     $"-map 0:v:0 -map 1:a:0 " +
@@ -265,7 +266,7 @@ namespace プロコン部チーム_0622_TEST
 
 
                 string baseName = $"{DateTime.Now:yyyy_MM_dd}";
-                string outputFolder = Path.GetDirectoryName(Properties.Settings.Default.raw_movie_filepath);
+                string outputFolder = Properties.Settings.Default.folderpath;
                 string finalName = baseName + ".mp4";
                 string finalPath = Path.Combine(outputFolder, finalName);
 
