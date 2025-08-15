@@ -264,7 +264,7 @@ namespace プロコン部チーム_0622_TEST
                 double startTime = Math.Max(0, durationSeconds - recordtime);
 
 
-                string baseName = $"combined_{DateTime.Now:yyyy_MM_dd}";
+                string baseName = $"{DateTime.Now:yyyy_MM_dd}";
                 string outputFolder = Path.GetDirectoryName(Properties.Settings.Default.raw_movie_filepath);
                 string finalName = baseName + ".mp4";
                 string finalPath = Path.Combine(outputFolder, finalName);
