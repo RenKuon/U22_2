@@ -1,4 +1,4 @@
-﻿namespace プロコン部チーム_0622_TEST
+﻿namespace クリッパーInstantReplay
 {
     partial class Form3
     {

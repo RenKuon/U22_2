@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace プロコン部チーム_0622_TEST
+namespace クリッパーInstantReplay
 {
     public partial class Form2 : Form
     {

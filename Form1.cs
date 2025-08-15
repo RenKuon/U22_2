@@ -14,7 +14,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 
-namespace プロコン部チーム_0622_TEST
+namespace クリッパーInstantReplay
 {
     public partial class Form1 : Form
     {
@@ -141,13 +141,26 @@ namespace プロコン部チーム_0622_TEST
         {
             // Alt + F10 をグローバルホットキーとして登録
             RegisterHotKey(this.Handle, HOTKEY_ID, MOD_ALT, (int)Keys.F10);
+
+            // ffmpegが既に実行中の場合は、インスタントリプレイを停止
+            Process[] processes = Process.GetProcessesByName("ffmpeg");
+            if (processes.Length > 0)
+            {
+                recorder.stop_instantreplay();
+            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             // アプリケーション終了時にホットキーを解除
             UnregisterHotKey(this.Handle, HOTKEY_ID);
-            recorder.stop_instantreplay();
+
+            // ffmpegが実行中の場合は、インスタントリプレイを停止
+            Process[] processes = Process.GetProcessesByName("ffmpeg");
+            if (processes.Length > 0)
+            {
+                recorder.stop_instantreplay();
+            }
         }
 
         public class FFmpegRecorder

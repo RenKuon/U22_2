@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3766F2F3-B0CC-4E7B-938C-77559DF55E77}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>プロコン部チーム_0622_TEST</RootNamespace>
-    <AssemblyName>プロコン部チーム_0622_TEST</AssemblyName>
+    <RootNamespace>チームプロコン.InstantReplay</RootNamespace>
+    <AssemblyName>チームプロコン.InstantReplay</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -139,6 +139,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.manifest" />
     <None Include="packages.config" />

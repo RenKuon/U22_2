@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace プロコン部チーム_0622_TEST
+namespace クリッパーInstantReplay
 {
     internal static class Program
     {

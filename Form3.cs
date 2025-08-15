@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace プロコン部チーム_0622_TEST
+namespace クリッパーInstantReplay
 {
     public partial class Form3 : Form
     {
