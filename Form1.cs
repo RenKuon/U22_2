@@ -47,16 +47,16 @@ namespace プロコン部チーム_0622_TEST
         }
 
         // ✅ イベントハンドラはここ（Form1内）に定義すべき
-        private void button1_Click(object sender, EventArgs e)
+        private void instantreplay_ONOFF_button_Click(object sender, EventArgs e)
         {
             if (instantreplay_mode)
             {
                 recorder.stop_instantreplay();
                 instantreplay_mode = false;
-                button1.Enabled = true;
-                label1.Visible = false;
-                button3.Enabled = true;
-                button1.Text = "インスタントリプレイON";
+                instantreplay_ONOFF_button.Enabled = true;
+                rec_now_label.Visible = false;
+                settings_button.Enabled = true;
+                instantreplay_ONOFF_button.Text = "インスタントリプレイON";
             }
             else
             {
@@ -100,12 +100,12 @@ namespace プロコン部チーム_0622_TEST
                 return;
             }
 
-            button1.Text = "インスタントリプレイOFF";
+            instantreplay_ONOFF_button.Text = "インスタントリプレイOFF";
             instantreplay_mode = true;
 
-            button2.Visible = true;
-            label1.Visible = true;
-            button3.Enabled = false;
+            rec_save_button.Visible = true;
+            rec_now_label.Visible = true;
+            settings_button.Enabled = false;
 
             recorder = new FFmpegRecorder();
 
@@ -117,7 +117,7 @@ namespace プロコン部チーム_0622_TEST
         }
 
 
-        private void button2_Click(object sender, EventArgs e)
+        private void rec_save_button_Click(object sender, EventArgs e)
         {
             if (recorder.Stop_Recording())
             {
@@ -125,13 +125,13 @@ namespace プロコン部チーム_0622_TEST
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void settings_button_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
             form2.Show();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void edit_button_Click(object sender, EventArgs e)
         {
             Form3 form3 = new Form3();
             form3.Show();
@@ -334,7 +334,7 @@ namespace プロコン部チーム_0622_TEST
                     if (instantreplay_mode)
                     {
                         // 録画中なら録画停止ボタンをクリックしたのと同じ処理を呼び出す
-                        button2_Click(this, EventArgs.Empty);
+                        rec_save_button_Click(this, EventArgs.Empty);
                     }
                 }
             }
