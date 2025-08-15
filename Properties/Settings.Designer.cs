@@ -94,5 +94,17 @@ namespace プロコン部チーム_0622_TEST.Properties {
                 this["set_output_device"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string cut_folderpath {
+            get {
+                return ((string)(this["cut_folderpath"]));
+            }
+            set {
+                this["cut_folderpath"] = value;
+            }
+        }
     }
 }

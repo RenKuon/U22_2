@@ -24,17 +24,12 @@ namespace プロコン部チーム_0622_TEST
 
 
         }
-        public static class AppState
-        {
-            public static string FolderPath;
-            public static string FolderName;
-        }
 
         private void Form2_Load(object sender, EventArgs e)
         {
             this.ActiveControl = null;
-            textBox1.ReadOnly = true;
-            textBox1.Text = Properties.Settings.Default.folderpath;     // 設定からフォルダパスを取得
+            reference_textbox1.ReadOnly = true;
+            reference_textbox1.Text = Properties.Settings.Default.folderpath;     // 設定からフォルダパスを取得
             set_output_device_comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
 
@@ -125,7 +120,7 @@ namespace プロコン部チーム_0622_TEST
 
 
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void reference_button1_click(object sender, EventArgs e)
         {
             using (FolderBrowserDialog fbd = new FolderBrowserDialog())
             {
@@ -133,11 +128,41 @@ namespace プロコン部チーム_0622_TEST
                 {
                     Properties.Settings.Default.folderpath = fbd.SelectedPath;
                     Properties.Settings.Default.Save();
-                    AppState.FolderPath = Properties.Settings.Default.folderpath;
+                    reference_textbox1.Text = Properties.Settings.Default.folderpath;
+                    MessageBox.Show("出力ファイルのパス指定が完了しました。");
+
+                    if (Properties.Settings.Default.cut_folderpath == "")
+                    {
+                        Properties.Settings.Default.cut_folderpath = fbd.SelectedPath; // 同じフォルダを出力先に変更
+                        Properties.Settings.Default.Save();
+                        reference_textbox2.Text = Properties.Settings.Default.cut_folderpath;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("フォルダの選択がキャンセルされました。");
+                    return;
                 }
             }
-            textBox1.Text = Properties.Settings.Default.folderpath;
-            MessageBox.Show("出力ファイルのパス指定が完了しました。");
+        }
+
+        private void reference_button2_click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            {
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    Properties.Settings.Default.cut_folderpath = fbd.SelectedPath;
+                    Properties.Settings.Default.Save();
+                    reference_textbox2.Text = Properties.Settings.Default.cut_folderpath;
+                    MessageBox.Show("出力ファイルのパス指定が完了しました。");
+                }
+                else
+                {
+                    MessageBox.Show("フォルダの選択がキャンセルされました。");
+                    return;
+                }
+            }
         }
 
 

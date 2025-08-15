@@ -93,7 +93,7 @@ namespace プロコン部チーム_0622_TEST
             int i = 1; //連番の初期値
             while (File.Exists(output_filepath)) //同名のファイルが存在する場合にファイル名に連番をつける
             {
-                output_filepath = Path.Combine(Properties.Settings.Default.folderpath, $"{output_filename_textbox.Text}({(i)}).mp4");
+                output_filepath = Path.Combine(Properties.Settings.Default.cut_folderpath, $"{output_filename_textbox.Text}({(i)}).mp4");
                 i++;
             }
 
@@ -114,9 +114,6 @@ namespace プロコン部チーム_0622_TEST
             this.label2.Visible = true; //実行中テキストを表示する
 
             //カット処理の実行]
-
-
-            //コピーバージョン
             string ffmpegCommand = $"ffmpeg -ss {start_time} -i \"{input_filepath}\" -to {end_time} -c copy \"{output_filepath}\"";
 
 
@@ -354,12 +351,6 @@ namespace プロコン部チーム_0622_TEST
                     cut_end_time_display_label.Text = $"カット終了時間: {Properties.Settings.Default.cut_end_time.ToString(@"mm\:ss\.ff")}"; ;// カット終了時間の表示を更新
                 }
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Form2 form2 = new Form2();
-            form2.ShowDialog();
         }
 
         private void tablelayout_click(object sender, MouseEventArgs e)
