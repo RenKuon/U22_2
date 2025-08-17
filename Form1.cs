@@ -14,7 +14,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 
-namespace クリッパーInstantReplay
+namespace ClipperInstantReplay
 {
     public partial class Form1 : Form
     {
@@ -73,25 +73,29 @@ namespace クリッパーInstantReplay
             }
 
 
-            // NAudioを使ってオーディオ出力デバイスの数を取得
-            int deviceCount = WaveIn.DeviceCount;
-
-            for (int i = 0; i < deviceCount; i++)
+            if (!Properties.Settings.Default.set_output_device.Contains("ステレオ ミキサー"))
             {
-                var caps = WaveIn.GetCapabilities(i);
+                // ステレオミキサーが選択されていない場合の警告メッセージ
+                string message = "ステレオミキサーが選択されていません。このまま続けると、システム音声が録音されない可能性があります。実行しますか？";
+                string caption = "警告";
 
-                if (caps.ProductName.Contains("ステレオ ミキサー"))
+                // はい/いいえ ボタン付きのメッセージボックスを表示
+                DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                // ユーザーの選択をチェック
+                if (result == DialogResult.Yes)
                 {
-                    Properties.Settings.Default.set_output_device = caps.ProductName; // 設定に保存
-                    Properties.Settings.Default.Save(); // 設定を保存
+                    // 「はい」が押された場合、録音処理を続行
+                    // 例：StartRecordingMethod();
+                    MessageBox.Show("録音を開始します。");
+                }
+                else
+                {
+                    // 「いいえ」が押された場合、処理を中断
+                    return; // このメソッドを抜けて、録音処理を行わない
                 }
             }
 
-            if (!Properties.Settings.Default.set_output_device.Contains("ステレオ ミキサー"))
-            {
-                MessageBox.Show("ステレオ ミキサーが見つかりません。ステレオミキサーを有効にしてください。");
-                return;
-            }
 
 
             if (Properties.Settings.Default.recordtime <= 0)
@@ -99,6 +103,7 @@ namespace クリッパーInstantReplay
                 MessageBox.Show("録画時間が設定されていません。設定を行ってください。");
                 return;
             }
+
 
             instantreplay_ONOFF_button.Text = "インスタントリプレイOFF";
             instantreplay_mode = true;

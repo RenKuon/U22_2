@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace クリッパーInstantReplay
+namespace ClipperInstantReplay
 {
     public partial class Form2 : Form
     {
@@ -21,7 +21,6 @@ namespace クリッパーInstantReplay
             this.AutoScaleMode = AutoScaleMode.Dpi;
 
             set_recordtime_label.Text = $"設定されている録画時間:{Properties.Settings.Default.recordtime / 60}分"; // 設定から録画時間を取得して表示
-
 
         }
 
@@ -47,16 +46,10 @@ namespace クリッパーInstantReplay
                 var caps = WaveIn.GetCapabilities(i);
                 set_output_device_comboBox.Items.Add(caps.ProductName);
 
-                if (caps.ProductName.Contains("ステレオ ミキサー"))
+                if (caps.ProductName.Contains(Properties.Settings.Default.set_output_device))
                 {
                     set_output_device_comboBox.SelectedIndex = i; // デフォルトで選択
-                    Properties.Settings.Default.set_output_device = caps.ProductName; // 設定に保存
-                    Properties.Settings.Default.Save(); // 設定を保存
                 }
-            }
-            if (!Properties.Settings.Default.set_output_device.Contains("ステレオ ミキサー"))
-            {
-                MessageBox.Show("ステレオ ミキサーが見つかりません。ステレオミキサーを有効にしてください。");
             }
         }
 
@@ -170,15 +163,8 @@ namespace クリッパーInstantReplay
 
         private void set_output_device_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!set_output_device_comboBox.SelectedItem.ToString().Contains("ステレオ ミキサー"))
-            {
-                MessageBox.Show("ステレオ ミキサーが見つかりません。ステレオミキサーを有効にしてください。");
-            }
-            else
-            {
-                Properties.Settings.Default.set_output_device = set_output_device_comboBox.SelectedItem.ToString(); // 設定に保存
-                Properties.Settings.Default.Save(); // 設定を保存
-            }
+            Properties.Settings.Default.set_output_device = set_output_device_comboBox.SelectedItem.ToString(); // 設定に保存
+            Properties.Settings.Default.Save(); // 設定を保存
         }
     }
 }

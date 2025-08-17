@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace クリッパーInstantReplay.Properties {
+namespace ClipperInstantReplay.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

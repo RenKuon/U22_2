@@ -1,4 +1,4 @@
-﻿namespace クリッパーInstantReplay
+﻿namespace ClipperInstantReplay
 {
     partial class Form3
     {
