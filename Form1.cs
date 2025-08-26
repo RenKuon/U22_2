@@ -151,7 +151,22 @@ namespace ClipperInstantReplay
             Process[] processes = Process.GetProcessesByName("ffmpeg");
             if (processes.Length > 0)
             {
-                recorder.stop_instantreplay();
+                MessageBox.Show("FFmpegが既に実行中です。FFmpegを強制終了させます。");
+                foreach (Process process in processes)
+                {
+                    try
+                    {
+                        // プロセスを強制終了
+                        process.Kill();
+                        // 終了するまで待機
+                        process.WaitForExit();
+                    }
+                    catch (Exception ex)
+                    {
+                        // プロセス終了時に発生する可能性のある例外を処理
+                        MessageBox.Show($"FFmpegプロセスの終了中にエラーが発生しました: {ex.Message}");
+                    }
+                }
             }
         }
 
